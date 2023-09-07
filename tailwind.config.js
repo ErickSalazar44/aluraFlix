@@ -5,18 +5,18 @@ export default {
         extend: {
             backgroundImage: {
                 gradient:
-                    "linear-gradient(270deg, rgba(255, 255, 255, 0) -14.17%, rgb(18, 20, 20) 90.00%)",
+                    "linear-gradient(270deg, rgba(255, 255, 255, 0) -44.17%, rgb(10, 10, 10) 80.09%)",
             },
             colors: {
                 colorMenu: "#ffffffb3",
             },
             minHeight: {
-                homeSpaceFondo: "calc(80vh - 296px)",
+                homeSpaceFondo: "calc(85vh - 300px)",
             },
             backgroundColor: {
                 navbar: "#0f0f0f",
             },
         },
+        plugins: [],
     },
-    plugins: [],
 };

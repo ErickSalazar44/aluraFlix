@@ -3,10 +3,10 @@ import axios from "axios";
 
 // Define un thunk para obtener los géneros
 export const fetchGenres = createAsyncThunk("genres/fetchGenres", async () => {
-    const apiKey = "617b8b681bdb0227b53464f2d357d8e1&language=es-ES";
+    const apiKey = "617b8b681bdb0227b53464f2d357d8e1";
 
     const response = await axios.get(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`
+        `https://api.themoviedb.org/3/genre/movie/list?language=es-ES&api_key=${apiKey}`
     );
     return response.data.genres;
 });

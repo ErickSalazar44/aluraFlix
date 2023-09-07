@@ -85,7 +85,7 @@ const MovieSlider = ({ movies, genres }) => {
                         </div>
                     </SwiperSlide>
                 </Swiper>
-                <span className='my-8 block'></span>
+                <span className='my-4 block'></span>
                 <div className='relative z-10 swiper-paginacion w-full text-center space-x-4'></div>
             </div>
         </>

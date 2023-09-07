@@ -4,6 +4,8 @@ import MovieSlider from "../components/Home/MovieSlider";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGenres } from "../store/slices/genresSlice";
 import { NavBar } from "../components/Header/NavBar";
+import PublicityPage from "../components/Home/PublicityPage";
+import Slider from "../components/Slider";
 
 const HomePage = () => {
     // peliculas mas populares
@@ -38,8 +40,48 @@ const HomePage = () => {
                         movies={popularMovies?.results.slice(0, 7)}
                         genres={genres}
                     />
-                    <section className="min-h-screen w-full"></section>
-                    <section className="min-h-screen w-full"></section>
+                    <PublicityPage url='/anuncio.avif' />
+                    <section className='px-8'>
+                        <div className='mb-7'>
+                            <Slider
+                                path='/trending/tv/week'
+                                titulo='Lo más popular'
+                            />
+                        </div>
+                        <div className='mb-7'>
+                            <Slider
+                                path='/movie/popular'
+                                query={"page=2"}
+                                titulo='Del cine a tu casa'
+                                subtitulo={
+                                    "Culturas valiosas. Historias diversas. Energía vibrante."
+                                }
+                            />
+                        </div>
+                    </section>
+                    {/* Anuncio 2 */}
+                    <PublicityPage
+                        url={
+                            "https://art-gallery-latam.api.hbo.com/images/fzElsTTwA7Knig15UGwmN$$$LFEFOOTER$$$latam/background?v=f30a3f85c906dc49eb62955118d74cdb&format=png&size=400x400&compression=low&protection=false&scaleDownToFit=false&language=es-419"
+                        }
+                    />
+                    <section className='px-8'>
+                        <div className='mb-7'>
+                            <Slider
+                                path='/tv/top_rated'
+                                titulo='Noche de pelis todos los días'
+                            />
+                        </div>
+                        <div className='pb-7'>
+                            <Slider
+                                path='/movie/top_rated'
+                                titulo='Colecciones icónicas'
+                                subtitulo={
+                                    "Historias inolvidables que nos robaron el corazón."
+                                }
+                            />
+                        </div>
+                    </section>
                 </>
             )}
         </div>
