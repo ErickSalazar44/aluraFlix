@@ -25,7 +25,7 @@ const MovieSlider = ({ movies, genres }) => {
     const getGenreNamesByIds = (state, idArray) => {
         return idArray.map((id) => {
             const genre = state.find((genre) => genre.id === id);
-            return genre ? genre.name : `Desconocido${id}`;
+            return genre ? genre.name : `Acción${id}`;
         });
     };
 
@@ -38,7 +38,6 @@ const MovieSlider = ({ movies, genres }) => {
         backdropFilter : ' blur(6px)',
         backgroundColor: 'rgba(24, 23, 23, 0.021)',
     }
-
 
     return (
         <>

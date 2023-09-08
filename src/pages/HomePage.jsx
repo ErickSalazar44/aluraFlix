@@ -3,14 +3,13 @@ import { useEffect } from "react";
 import MovieSlider from "../components/Home/MovieSlider";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGenres } from "../store/slices/genresSlice";
-import { NavBar } from "../components/Header/NavBar";
 import PublicityPage from "../components/Home/PublicityPage";
 import Slider from "../components/Slider";
 
 const HomePage = () => {
     // peliculas mas populares
     const baseUrl = "https://api.themoviedb.org/3";
-    const path = "/movie/popular";
+    const path = "/trending/tv/week";
 
     const dispatch = useDispatch();
     const genres = useSelector((state) => state.genresMovies);
@@ -35,16 +34,24 @@ const HomePage = () => {
             {isError && <p>Hubo un error al cargar las peliculas</p>}
             {!loading && !isError && (
                 <>
-                    <NavBar />
+                    
                     <MovieSlider
                         movies={popularMovies?.results.slice(0, 7)}
                         genres={genres}
                     />
+
+
+                    <section className='px-8 mt-8 mb-4 text-white'>
+                        <h4 className="font-semibold text-lg">Episodios Gratuitos</h4>
+                        <p className="opacity-80 text-sm">Emociónate con estrenos de películas y series icónicas.</p>
+                    </section>
+
+
                     <PublicityPage url='/anuncio.avif' />
-                    <section className='px-8'>
+                    <section className='px-8 my-8'>
                         <div className='mb-7'>
                             <Slider
-                                path='/trending/tv/week'
+                                path='/movie/popular'
                                 titulo='Lo más popular'
                             />
                         </div>
@@ -64,8 +71,10 @@ const HomePage = () => {
                         url={
                             "https://art-gallery-latam.api.hbo.com/images/fzElsTTwA7Knig15UGwmN$$$LFEFOOTER$$$latam/background?v=f30a3f85c906dc49eb62955118d74cdb&format=png&size=400x400&compression=low&protection=false&scaleDownToFit=false&language=es-419"
                         }
+                        btn='Cátegoria'
+                        tittle='"¡Descubre el cine en casa con nosotros!"'
                     />
-                    <section className='px-8'>
+                    <section className='px-8 mt-8'>
                         <div className='mb-7'>
                             <Slider
                                 path='/tv/top_rated'

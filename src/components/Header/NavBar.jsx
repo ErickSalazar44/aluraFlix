@@ -4,6 +4,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export const NavBar = () => {
     const [isShowMenu, setisShowMenu] = useState(false);
@@ -36,7 +37,9 @@ export const NavBar = () => {
                         <AiOutlineMenu size={24} />
                     </div>
                     <div className='w-28'>
-                        <img src='/logo.png' alt='logo' />
+                        <Link to='/'>
+                            <img src='/logo.png' alt='logo' />
+                        </Link>
                     </div>
                     <div
                         className='cursor-pointer'

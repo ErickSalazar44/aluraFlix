@@ -17,7 +17,7 @@ const MovieBackground = ({ movies, genreNamesByIds, currentIndex }) => {
                         className={`flex flex-col gap-3 justify-end min-h-homeSpaceFondo`}
                     >
                         <h2 className='text-white text-[1.875rem] font-semibold'>
-                            {movies?.[currentIndex]?.original_title}
+                            {movies?.[currentIndex]?.original_name}
                         </h2>
                         <ul className='flex gap-4 text-white'>
                             {genreNamesByIds?.slice(0, 3).map((genre) => (
