@@ -38,7 +38,7 @@ export const NavBar = () => {
                     </div>
                     <div className='w-28'>
                         <Link to='/'>
-                            <img src='/logo.png' alt='logo' />
+                            <img src='/logo.webp' alt='logo' />
                         </Link>
                     </div>
                     <div

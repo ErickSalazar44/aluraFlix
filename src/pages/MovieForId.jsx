@@ -1,63 +1,148 @@
-import { useParams } from "react-router-dom"
-import useFetch from "../hooks/useFetch"
+import { useParams } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 import { useEffect } from "react";
+import MovieTrailer from "../components/Movie/MovieTrailer";
+import useProviders from "../hooks/useProviders";
+import Providers from "../components/Movie/Providers";
+
+import HeaderMovie from "../components/Movie/HeaderMovie";
+import Button from "../components/Button";
+import useCredits from "../hooks/useCredits";
+import Elenco from "../components/Movie/Elenco";
 
 
-const MovieForId = () => {
 
-    const {id} = useParams()
+
+const MovieForId = ({ isMovie }) => {
+    const { id } = useParams();
 
     const baseUrl = "https://api.themoviedb.org/3";
-    const path = "/movie";
 
-    const [popularMovies, getMovies, isError, loading] = useFetch(baseUrl);
+    const path = isMovie ? "/movie" : "/tv";
+
+    const query = "append_to_response=videos";
+
+    const [movie, getMovie, isError, loading] = useFetch(baseUrl);
+
+    const [providers, getProviders] = useProviders();
+
+    const [elenco, getElenco, isErrorElenco] = useCredits();
 
     useEffect(() => {
-        getMovies(`${path}/${id}`);
+        getMovie(`${path}/${id}`, query);
     }, []);
 
-    console.log(popularMovies)
-    
-    const bgImg = {
-        backgroundImage : `url('https://image.tmdb.org/t/p/w500/${popularMovies?.backdrop_path}')`,
-        backgroundPosition: 'calc((((100vw / 2.222222) - 20px) / 1.5) / 2) 0',
-        backgroundSize : 'cover',
-        backgroundRepeat: 'no-repeat'
+    useEffect(() => {
+        getProviders(id);
+        getElenco(id)
+    }, []);
+
+
+    console.log(providers)
+
+
+    // HORAS Y MINUTOS DE PELICULA 
+
+
+    const handleTimeMovie = (tiempo) => {
+        const horas = Math.floor(tiempo / 60);
+        const minutos = tiempo % 60
+        
+        return {horas, minutos}
     }
 
-    const img = {
-        width : 'calc(((100vw/1.8))/1.5)',
-        minWidth : 'calc(((100vw/1.8) )/1.5)',
-        height : 'calc((100vw/1.8))',
-        minHeight : 'calc((100vw/1.8))'
-    }
+    return (
+        <article className='text-white'>
+            {/* header */}
+            <HeaderMovie movie={movie}/>
 
+            {/* BODY */}
+            <div className='px-6'>
+                <div className='w-full py-5'>
+                    <h2 className='font-semibold text-titulo'>
+                        {isMovie
+                            ? movie?.title
+                            : movie?.original_name}
+                    </h2>
+                    <div className=" mt-2 text-xs opacity-80 font-light flex gap-4">
+                        {
+                            movie?.runtime 
+                            ? <span className="block">{`${handleTimeMovie(movie?.runtime).horas} H ${handleTimeMovie(movie?.runtime).minutos} MIN`}</span>
+                            : (
+                                <>
+                                    <span className="block">{movie?.number_of_episodes} Episodios</span> 
+                                    <span className="block">{movie?.number_of_seasons} Temporadas</span>
+                                </>
+                                )
+                        }
+                        <span className='block'>{`${
+                                    isMovie
+                                        ? movie?.release_date.slice(0,4)
+                                        : movie?.last_air_date.slice(0,4)
+                                }`}
+                        </span>
+                        <span>HD</span>
+                    </div>
+                </div>
 
-  return (
-    <article className="text-white pt-navH" >
-        <div style={bgImg} className='h-[33vh] w-full min-w-full relative'>
-            <div className="bg-gradiant absolute top-0 left-0 w-full h-[101%]"></div>
-            <img
-                className="absolute z-10 rounded inset-y-1/2 top-1/2 transform -translate-y-1/2 left-5"
-                src={`https://image.tmdb.org/t/p/w500/${popularMovies?.poster_path}`} 
-                alt={popularMovies?.title}
-                style={img} 
-            />
-        </div>
-        <div className="px-6">
-            <div className="w-full py-5">
-                <h2 className="font-semibold text-titulo" >
-                    {popularMovies?.title}
-                    <span className="ml-2 opacity-80 font-light">{`(${popularMovies?.release_date.slice(0,4)})`}</span>    
-                </h2>
+                <div className="opacity-80 ">
+                    {/* <h3 className='text-[16px] font-semibold mb-2'>
+                        Synopsis
+                    </h3> */}
+                    <p className='text-sm '>{movie?.overview}</p>
+                </div>
             </div>
-            <div>
-                <h3 className="text-[17px] font-semibold mb-2">Vista general</h3>
-                <p className="text-sm">{popularMovies?.overview}</p>
-            </div>
-        </div>
-    </article>
-  )
-}
 
-export default MovieForId
+            {/* Categorias */}
+
+            <div className="px-6 mt-8">
+                <ul className="flex gap-4 opacity-80 flex-wrap">
+                    {
+                        movie?.genres.map(genre => (
+                            <li className="border px-3 py-2 rounded-2xl" key={genre.id}>{genre.name}</li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            {/* Homepage Provedores  */}
+            {
+                movie?.homepage.length > 0 
+                ? 
+                <div className="px-6 mt-8 flex flex-col gap-4">
+                    <a href={movie?.homepage} className="block w-[180px]">
+                        <Button text='Home Page'/>
+                    </a>
+
+                </div>
+                : <></>
+            }
+
+            {/* Reparto */}
+                {
+                    (elenco && !isErrorElenco) &&
+                    <div className="px-6 mt-8">
+                        <Elenco elenco={elenco}/>
+                    </div>
+                }
+
+                
+            {/* Provedores */}
+                { providers?.results && <Providers providers={providers}/> }
+
+
+
+            {/* SECCION TRAILER */}
+            {/* <div>
+                {movie?.videos?.results &&
+                    movie.videos.results.length > 0 && (
+                        <MovieTrailer
+                            videoUrl={`https://www.youtube.com/embed/${movie.videos.results[0].key}`}
+                        />
+                    )}
+            </div> */}
+        </article>
+    );
+};
+
+export default MovieForId;

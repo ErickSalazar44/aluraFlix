@@ -9,6 +9,8 @@ export default {
                 btn: "linear-gradient(1.5708rad, rgb(117, 62, 239) 25%, rgb(185, 8, 246) 100%)",
                 gradiant:
                     "linear-gradient(to right, rgb(0 0 0) 20%, rgb(0 0 0 / 0%) 100%)",
+                yGradiant:
+                    "linear-gradient(180deg, rgba(255, 255, 255, 0) 70%, rgb(20, 20, 20, 40) 100.09%)",
             },
             colors: {
                 colorMenu: "#ffffffb3",
@@ -23,7 +25,7 @@ export default {
                 navH: "80px",
             },
             fontSize: {
-                titulo: "calc(.6em + 2vw)",
+                titulo: "calc(.9em + 3vw)",
             },
         },
         plugins: [],

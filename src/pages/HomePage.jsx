@@ -53,6 +53,7 @@ const HomePage = () => {
                             <Slider
                                 path='/movie/popular'
                                 titulo='Lo más popular'
+                                isMovie='/movie'
                             />
                         </div>
                         <div className='mb-7'>
@@ -63,6 +64,7 @@ const HomePage = () => {
                                 subtitulo={
                                     "Culturas valiosas. Historias diversas. Energía vibrante."
                                 }
+                                isMovie='/movie'
                             />
                         </div>
                     </section>
@@ -79,6 +81,7 @@ const HomePage = () => {
                             <Slider
                                 path='/tv/top_rated'
                                 titulo='Noche de pelis todos los días'
+                                isMovie='/serie'
                             />
                         </div>
                         <div className='pb-7'>
@@ -88,6 +91,7 @@ const HomePage = () => {
                                 subtitulo={
                                     "Historias inolvidables que nos robaron el corazón."
                                 }
+                                isMovie='/movie'
                             />
                         </div>
                     </section>

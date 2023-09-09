@@ -1,6 +1,5 @@
 
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import './App.css'
 import HomePage from './pages/HomePage'
 import { NavBar } from './components/Header/NavBar'
 import MovieForId from './pages/MovieForId'
@@ -21,7 +20,8 @@ function App() {
 				<Routes>
 					{/* Home page */}
 					<Route path='/' element={<HomePage/>}/>
-					<Route path='/movie/:id' element={<MovieForId/>} />
+					<Route path='/movie/:id' element={<MovieForId isMovie={true}/>} />
+					<Route path='/serie/:id' element={<MovieForId isMovie={false}/>} />
 				</Routes>
 			</div>
 		</HashRouter>	

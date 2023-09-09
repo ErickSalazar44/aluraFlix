@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import useFetch from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 
-const Slider = ({ path, titulo, subtitulo, query }) => {
+const Slider = ({ path, titulo, subtitulo, query, isMovie }) => {
     // peliculas mas populares
     const baseUrl = "https://api.themoviedb.org/3";
     const [movies, getMovies, isError, loading] = useFetch(baseUrl);
@@ -24,8 +24,9 @@ const Slider = ({ path, titulo, subtitulo, query }) => {
 
     const navigateMovie = (id) => {
         console.log(`seleccionaste este id: ${id}`)
-        navigate(`movie/${id}`)
+        navigate(`${isMovie}/${id}`)
     }
+
 
     return (
         <article className='text-white'>
