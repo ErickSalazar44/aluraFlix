@@ -1,5 +1,5 @@
 
-import { HashRouter, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import { NavBar } from './components/Header/NavBar'
 import MovieForId from './pages/MovieForId'
@@ -8,23 +8,22 @@ function App() {
 
 	const fondo = {
 		backgroundColor: "#292929",
-		backgroundImage: "linear-gradient(to top, #0d0c20, #000000)",
+		backgroundImage: "linear-gradient(to top, #01000a, #000000)",
 		backgroundSize: "cover",
 		backgroundRepeat: "repeat",
 	}
 
 	return (
-		<HashRouter>
+
 			<div className='min-h-screen w-full' style={fondo}>
 				<NavBar />
 				<Routes>
 					{/* Home page */}
+					<Route path='/tv/:id' element={<MovieForId path={'/tv'}/>} />
+					<Route path='/movie/:id' element={<MovieForId path={'/movie'}/>} />
 					<Route path='/' element={<HomePage/>}/>
-					<Route path='/movie/:id' element={<MovieForId isMovie={true}/>} />
-					<Route path='/serie/:id' element={<MovieForId isMovie={false}/>} />
 				</Routes>
 			</div>
-		</HashRouter>	
 	)
 }
 

@@ -25,14 +25,15 @@ export const NavBar = () => {
         };
     }, []);
 
-    const headerClass = scrollY > 100 ? "bg-navbar " : "bg-transparent";
+    const headerClass = scrollY > 100 ? "bg-navbar translate-y-[0%]" : "bg-transparent -translate-y-full";
 
     return (
         <>
             <header
-                className={`transition-colors duration-300 ease-in-out fixed top-0 z-50 p-6 text-white w-full ${headerClass} opacity-95`}
+                className={`fixed top-0 z-50 p-6 text-white w-full`}
             >
-                <nav className='flex justify-between items-center opacity-95'>
+                <div className={`absolute top-0 left-0 w-full h-[74.5px] z-40 ${headerClass} transition-all duration-500 ease-in-out opacity-[95] `}></div>
+                <nav className='absolute top-0 left-0 w-full h-[74.5px] flex justify-between items-center opacity-95 z-50 px-6'>
                     <div className='cursor-pointer' onClick={menuOpen}>
                         <AiOutlineMenu size={24} />
                     </div>

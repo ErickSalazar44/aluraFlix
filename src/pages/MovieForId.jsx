@@ -1,32 +1,38 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import MovieTrailer from "../components/Movie/MovieTrailer";
 import useProviders from "../hooks/useProviders";
 import Providers from "../components/Movie/Providers";
-
 import HeaderMovie from "../components/Movie/HeaderMovie";
 import Button from "../components/Button";
 import useCredits from "../hooks/useCredits";
 import Elenco from "../components/Movie/Elenco";
+import useSimilar from "../hooks/useSimilar";
+import Recomendaciones from "../components/Movie/Recomendaciones";
 
 
 
 
-const MovieForId = ({ isMovie }) => {
+const MovieForId = ({ path }) => {
+
+
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const baseUrl = "https://api.themoviedb.org/3";
 
-    const path = isMovie ? "/movie" : "/tv";
 
     const query = "append_to_response=videos";
 
     const [movie, getMovie, isError, loading] = useFetch(baseUrl);
 
-    const [providers, getProviders] = useProviders();
+    const [providers, getProviders] = useProviders(path);
 
-    const [elenco, getElenco, isErrorElenco] = useCredits();
+    const [elenco, getElenco, isErrorElenco] = useCredits(path);
+
+    const [similares, getSimilares, isErrorSimilar ] = useSimilar(path)
+
 
     useEffect(() => {
         getMovie(`${path}/${id}`, query);
@@ -35,15 +41,13 @@ const MovieForId = ({ isMovie }) => {
     useEffect(() => {
         getProviders(id);
         getElenco(id)
+        getSimilares(id)
     }, []);
 
 
-    console.log(providers)
 
 
     // HORAS Y MINUTOS DE PELICULA 
-
-
     const handleTimeMovie = (tiempo) => {
         const horas = Math.floor(tiempo / 60);
         const minutos = tiempo % 60
@@ -51,16 +55,31 @@ const MovieForId = ({ isMovie }) => {
         return {horas, minutos}
     }
 
+    // Desplegar trailer 
+
+    const [playing, setPlaying] = useState(false)
+
+
+    // Funcion para navegar 
+    const navigateMovie = useCallback(
+        (id) => {
+            console.log(`seleccionaste este id: ${id}`);
+            console.log(`${path}/${id}`); 
+            navigate(`${path}/${id}`);
+        },
+        [id, path]
+    );
+
     return (
         <article className='text-white'>
             {/* header */}
-            <HeaderMovie movie={movie}/>
+            <HeaderMovie movie={movie} setPlaying={setPlaying}/>
 
             {/* BODY */}
             <div className='px-6'>
                 <div className='w-full py-5'>
                     <h2 className='font-semibold text-titulo'>
-                        {isMovie
+                        {path === '/movie'
                             ? movie?.title
                             : movie?.original_name}
                     </h2>
@@ -76,7 +95,7 @@ const MovieForId = ({ isMovie }) => {
                                 )
                         }
                         <span className='block'>{`${
-                                    isMovie
+                                    path === '/movie'
                                         ? movie?.release_date.slice(0,4)
                                         : movie?.last_air_date.slice(0,4)
                                 }`}
@@ -105,7 +124,7 @@ const MovieForId = ({ isMovie }) => {
                 </ul>
             </div>
 
-            {/* Homepage Provedores  */}
+            {/* Homepage */}
             {
                 movie?.homepage.length > 0 
                 ? 
@@ -133,14 +152,37 @@ const MovieForId = ({ isMovie }) => {
 
 
             {/* SECCION TRAILER */}
-            {/* <div>
-                {movie?.videos?.results &&
-                    movie.videos.results.length > 0 && (
-                        <MovieTrailer
-                            videoUrl={`https://www.youtube.com/embed/${movie.videos.results[0].key}`}
-                        />
-                    )}
-            </div> */}
+            
+            {
+                (playing) 
+                &&
+                <div className={`fixed top-0 z-40 grid place-items-center w-full min-h-full transition-all duration-500 `}>
+                    <div onClick={() => setPlaying(false) } className={`fixed w-full min-h-full bg-black z-50 opacity-90  transition-all duration-500`}></div>
+                    {
+                        (movie.videos.results.length >= 1)
+                        ?
+                        movie?.videos?.results &&
+                            movie.videos.results.length > 0 && (
+                                <MovieTrailer
+                                    videoUrl={`https://www.youtube.com/embed/${movie.videos.results[0].key}`}
+                                    playing={playing}
+                                    setPlaying={setPlaying}
+                                />
+                            )
+                        :
+                            
+                            <h4 className="z-50">VIDEO NO DISPONIBLE LO SENTIMOS </h4>
+                    }
+                </div>
+            }
+
+            {/* Recomendacion  */}
+
+
+            <div className="px-6 mt-8">
+                <Recomendaciones similares={similares} navigateMovie={navigateMovie} isMovie={path}/>
+            </div>
+
         </article>
     );
 };

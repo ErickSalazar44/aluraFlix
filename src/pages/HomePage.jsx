@@ -6,6 +6,7 @@ import { fetchGenres } from "../store/slices/genresSlice";
 import PublicityPage from "../components/Home/PublicityPage";
 import Slider from "../components/Slider";
 
+
 const HomePage = () => {
     // peliculas mas populares
     const baseUrl = "https://api.themoviedb.org/3";
@@ -27,6 +28,8 @@ const HomePage = () => {
             dispatch(fetchGenres());
         }
     }, [genres]);
+
+
 
     return (
         <div>
@@ -81,7 +84,7 @@ const HomePage = () => {
                             <Slider
                                 path='/tv/top_rated'
                                 titulo='Noche de pelis todos los días'
-                                isMovie='/serie'
+                                isMovie='/tv'
                             />
                         </div>
                         <div className='pb-7'>

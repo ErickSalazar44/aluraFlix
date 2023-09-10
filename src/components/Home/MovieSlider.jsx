@@ -11,6 +11,7 @@ import {useState } from "react";
 import MovieBackground from './MovieBackground';
 
 import {BiRightArrowAlt} from 'react-icons/bi'
+import { useNavigate } from 'react-router-dom';
 
 const MovieSlider = ({ movies, genres }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -39,6 +40,14 @@ const MovieSlider = ({ movies, genres }) => {
         backgroundColor: 'rgba(24, 23, 23, 0.021)',
     }
 
+    const navigate = useNavigate()
+
+    const handleMovie = (id) => {
+        console.log(`/tv/${id}`); 
+        navigate(`/tv/${id}`)
+    }
+
+
     return (
         <>
             <MovieBackground 
@@ -66,9 +75,12 @@ const MovieSlider = ({ movies, genres }) => {
                 >
                     {movies?.map((movie) => (
                         <SwiperSlide key={movie.id} className='w-full'>
-                            <div className=''>
+                            <div 
+                                className='w-full cursor-pointer'
+                                onClick={() => handleMovie(movie.id)}
+                            >
                                 <img
-                                    src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+                                    src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
                                     alt={movie.title}
                                     className='w-full h-[200px] object-cover'
                                 />

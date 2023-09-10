@@ -1,6 +1,6 @@
 import { FaRegPlayCircle } from "react-icons/fa";
 
-const HeaderMovie = ({ movie }) => {
+const HeaderMovie = ({ movie, setPlaying }) => {
     const bgImg = {
         backgroundImage: `url('https://image.tmdb.org/t/p/w500/${movie?.backdrop_path}')`,
     };
@@ -9,6 +9,12 @@ const HeaderMovie = ({ movie }) => {
         width: "calc(((100vw/1.8))/1.5)",
         height: "calc((100vw/1.8))",
     };
+
+    const handleTrailer = () => {
+        setPlaying(true)
+        console.log('Desplegar trailer')
+    }
+
 
     return (
         <header
@@ -23,7 +29,10 @@ const HeaderMovie = ({ movie }) => {
                 style={img}
             />
             <div className='w-[50%] h-full ml-auto relative'>
-                <div className='absolute top-[65%] -translate-y-[65%] left-10'>
+                <div 
+                    className='cursor-pointer absolute top-[65%] -translate-y-[65%] left-10 transition-transform   hover:scale-110'
+                    onClick={handleTrailer}
+                >
                     <FaRegPlayCircle size={60} color='white' />
                 </div>
             </div>
