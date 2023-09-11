@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import MovieSlider from "../components/Home/MovieSlider";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGenres } from "../store/slices/genresSlice";
+import { setMovies } from '../store/slices/homeSlice'
 import PublicityPage from "../components/Home/PublicityPage";
 import Slider from "../components/Slider";
 
@@ -23,11 +24,14 @@ const HomePage = () => {
     }, []);
 
     useEffect(() => {
-        // obtener los generos de la api
+        // almacenar la palicula y los generos en estado global
         if (!genres.length) {
             dispatch(fetchGenres());
         }
-    }, [genres]);
+        if (popularMovies) {
+            dispatch(setMovies(popularMovies))
+        }
+    }, [genres, popularMovies]);
 
 
 
@@ -37,20 +41,20 @@ const HomePage = () => {
             {isError && <p>Hubo un error al cargar las peliculas</p>}
             {!loading && !isError && (
                 <>
-                    
+                    {/* HOME HEADER  */}
                     <MovieSlider
                         movies={popularMovies?.results.slice(0, 7)}
                         genres={genres}
                     />
 
-
+                    {/* ANUNCIO */}
                     <section className='px-8 mt-8 mb-4 text-white'>
                         <h4 className="font-semibold text-lg">Episodios Gratuitos</h4>
                         <p className="opacity-80 text-sm">Emociónate con estrenos de películas y series icónicas.</p>
                     </section>
-
-
                     <PublicityPage url='/anuncio.avif' />
+
+                    {/* Body Slider Movie 1 */}
                     <section className='px-8 my-8'>
                         <div className='mb-7'>
                             <Slider
@@ -71,6 +75,7 @@ const HomePage = () => {
                             />
                         </div>
                     </section>
+
                     {/* Anuncio 2 */}
                     <PublicityPage
                         url={
@@ -79,6 +84,8 @@ const HomePage = () => {
                         btn='Cátegoria'
                         tittle='"¡Descubre el cine en casa con nosotros!"'
                     />
+
+                    {/* Body Slider Movie 2 */}
                     <section className='px-8 mt-8'>
                         <div className='mb-7'>
                             <Slider

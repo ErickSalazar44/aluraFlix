@@ -4,11 +4,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import { useNavigate } from "react-router-dom";
 
 
 
 
-const SliderMovie = ({ movies, isMovie, navigateMovie }) => {
+const SliderMovie = ({ movies, isMovie }) => {
+
+    const navigate = useNavigate()
+
+    const handleMovie = (id) => {
+        console.log(`${isMovie}/${id}`); 
+        navigate(`${isMovie}/${id}`)
+    }
 
     return (
         <Swiper slidesPerView={2} spaceBetween={11} className='mySwiper'>
@@ -16,7 +24,7 @@ const SliderMovie = ({ movies, isMovie, navigateMovie }) => {
                 <SwiperSlide key={movie.id}>
                     <div
                         className='cursor-pointer transition duration-300 filter saturate-[0.9] hover:saturate-[1.1] border-transparent border-2 hover:border-cyan-600'
-                        onClick={() => navigateMovie(movie.id)}
+                        onClick={() => handleMovie(movie.id)}
                     >
                         <img
                             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}

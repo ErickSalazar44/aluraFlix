@@ -45,8 +45,10 @@ export const NavBar = () => {
                     <div
                         className='cursor-pointer'
                         onClick={() => console.log("ir a buscar peliculas")}
-                    >
-                        <GoSearch size={24} />
+                    >   
+                        <Link to='/search'>
+                            <GoSearch size={24} />
+                        </Link>
                     </div>
                 </nav>
             </header>

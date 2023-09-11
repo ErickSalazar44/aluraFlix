@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { useCallback, useEffect, useState } from "react";
 import MovieTrailer from "../components/Movie/MovieTrailer";
@@ -10,6 +10,7 @@ import useCredits from "../hooks/useCredits";
 import Elenco from "../components/Movie/Elenco";
 import useSimilar from "../hooks/useSimilar";
 import Recomendaciones from "../components/Movie/Recomendaciones";
+import Porcentaje from "../components/Porcentaje";
 
 
 
@@ -18,7 +19,6 @@ const MovieForId = ({ path }) => {
 
 
     const { id } = useParams();
-    const navigate = useNavigate();
 
     const baseUrl = "https://api.themoviedb.org/3";
 
@@ -36,13 +36,13 @@ const MovieForId = ({ path }) => {
 
     useEffect(() => {
         getMovie(`${path}/${id}`, query);
-    }, []);
+    }, [path, id]);
 
     useEffect(() => {
         getProviders(id);
         getElenco(id)
         getSimilares(id)
-    }, []);
+    }, [path, id]);
 
 
 
@@ -60,15 +60,7 @@ const MovieForId = ({ path }) => {
     const [playing, setPlaying] = useState(false)
 
 
-    // Funcion para navegar 
-    const navigateMovie = useCallback(
-        (id) => {
-            console.log(`seleccionaste este id: ${id}`);
-            console.log(`${path}/${id}`); 
-            navigate(`${path}/${id}`);
-        },
-        [id, path]
-    );
+
 
     return (
         <article className='text-white'>
@@ -76,7 +68,7 @@ const MovieForId = ({ path }) => {
             <HeaderMovie movie={movie} setPlaying={setPlaying}/>
 
             {/* BODY */}
-            <div className='px-6'>
+            <div className='px-6 mb-8'>
                 <div className='w-full py-5'>
                     <h2 className='font-semibold text-titulo'>
                         {path === '/movie'
@@ -111,7 +103,6 @@ const MovieForId = ({ path }) => {
                     <p className='text-sm '>{movie?.overview}</p>
                 </div>
             </div>
-
             {/* Categorias */}
 
             <div className="px-6 mt-8">
@@ -128,14 +119,14 @@ const MovieForId = ({ path }) => {
             {
                 movie?.homepage.length > 0 
                 ? 
-                <div className="px-6 mt-8 flex flex-col gap-4">
+                <div className="px-6 mt-8 flex items-center gap-16">
                     <a href={movie?.homepage} className="block w-[180px]">
                         <Button text='Home Page'/>
                     </a>
-
                 </div>
                 : <></>
             }
+            
 
             {/* Reparto */}
                 {
@@ -178,9 +169,8 @@ const MovieForId = ({ path }) => {
 
             {/* Recomendacion  */}
 
-
             <div className="px-6 mt-8">
-                <Recomendaciones similares={similares} navigateMovie={navigateMovie} isMovie={path}/>
+                <Recomendaciones similares={similares} isMovie={path}/>
             </div>
 
         </article>

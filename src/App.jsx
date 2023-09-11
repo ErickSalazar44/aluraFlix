@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import { NavBar } from './components/Header/NavBar'
 import MovieForId from './pages/MovieForId'
+import SearchMovie from './pages/SearchMovie'
 
 function App() {
 
@@ -19,9 +20,16 @@ function App() {
 				<NavBar />
 				<Routes>
 					{/* Home page */}
-					<Route path='/tv/:id' element={<MovieForId path={'/tv'}/>} />
-					<Route path='/movie/:id' element={<MovieForId path={'/movie'}/>} />
 					<Route path='/' element={<HomePage/>}/>
+
+					{/* Search Movie */}
+					<Route path='/search' element={<SearchMovie/>}/>
+
+					{/* Ruta Detalles tv */}
+					<Route path='/tv/:id' element={<MovieForId path={'/tv'}/>} />
+
+					{/* Ruta Detalles Movie */}
+					<Route path='/movie/:id' element={<MovieForId path={'/movie'}/>} />
 				</Routes>
 			</div>
 	)

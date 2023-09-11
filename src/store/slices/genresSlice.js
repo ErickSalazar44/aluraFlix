@@ -26,6 +26,8 @@ const genresSlice = createSlice({
 
 export const { setGenres, getGenres } = genresSlice.actions;
 
-// Funcion para obtener los nombres de los generos por IDs
+// Define géneros desde el estado global
+export const selectGenres = (state) => state.genres;
 
+// Funcion para obtener los nombres de los generos por IDs
 export default genresSlice.reducer;

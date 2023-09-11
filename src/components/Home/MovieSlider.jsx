@@ -48,6 +48,7 @@ const MovieSlider = ({ movies, genres }) => {
     }
 
 
+
     return (
         <>
             <MovieBackground 

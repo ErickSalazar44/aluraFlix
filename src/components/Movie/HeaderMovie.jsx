@@ -1,8 +1,9 @@
 import { FaRegPlayCircle } from "react-icons/fa";
+import Porcentaje from "../Porcentaje";
 
 const HeaderMovie = ({ movie, setPlaying }) => {
     const bgImg = {
-        backgroundImage: `url('https://image.tmdb.org/t/p/w500/${movie?.backdrop_path}')`,
+        backgroundImage: `url('https://image.tmdb.org/t/p/w780/${movie?.backdrop_path}')`,
     };
 
     const img = {
@@ -35,6 +36,9 @@ const HeaderMovie = ({ movie, setPlaying }) => {
                 >
                     <FaRegPlayCircle size={60} color='white' />
                 </div>
+            </div>
+            <div className="absolute right-6 -bottom-6 bg-gray-950 rounded-full">
+                <Porcentaje movie={movie}/>
             </div>
         </header>
     );

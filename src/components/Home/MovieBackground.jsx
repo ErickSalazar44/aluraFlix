@@ -7,7 +7,7 @@ const MovieBackground = ({ movies, genreNamesByIds, currentIndex }) => {
                 className={`flex flex-col relative pt-[80px] after:content-[''] after:absolute after:inset-0 after:z-[1] after:bg-gradient after:h-[85vh]`}
             >
                 <img
-                    src={`https://image.tmdb.org/t/p/w500${movies?.[currentIndex]?.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/w780${movies?.[currentIndex]?.poster_path}`}
                     alt={movies?.[currentIndex]?.title}
                     className='absolute z-[1] top-0 w-[90%] right-0 h-[85vh] object-cover saturate-[1.2]'
                 />
