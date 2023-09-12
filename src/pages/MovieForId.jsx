@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MovieTrailer from "../components/Movie/MovieTrailer";
 import useProviders from "../hooks/useProviders";
 import Providers from "../components/Movie/Providers";
@@ -10,8 +10,6 @@ import useCredits from "../hooks/useCredits";
 import Elenco from "../components/Movie/Elenco";
 import useSimilar from "../hooks/useSimilar";
 import Recomendaciones from "../components/Movie/Recomendaciones";
-import Porcentaje from "../components/Porcentaje";
-
 
 
 

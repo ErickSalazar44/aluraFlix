@@ -20,7 +20,7 @@ const SliderGenre = ({ genres }) => {
             >
                 {genres?.map((genre) => (
                     <SwiperSlide
-                        className='text-sm border-opacity-30 border border-white rounded-xl h-[30px] flex justify-center items-center'
+                        className='text-sm cursor-pointer border-opacity-30 border border-white rounded-xl h-[30px] flex justify-center items-center'
                         key={genre.id}
                     >
                         {genre.name}
