@@ -1,65 +1,54 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Input } from "../components/Search/Input";
-import { fetchGenres } from "../store/slices/genresSlice";
 import { useEffect, useState } from "react";
-import SliderGenre from "../components/Search/SliderGenre";
-import useFetch from "../hooks/useFetch";
-import GridMovie from "../components/Search/GridMovie";
 import { useNavigate } from "react-router-dom";
+import { fetchGenres } from "../store/slices/genresSlice";
+import useFetch from "../hooks/useFetch";
 import useSearchMovie from "../hooks/useSearchMovie";
+import SliderGenre from "../components/Search/SliderGenre";
+import { Input } from "../components/Search/Input";
+import GridMovie from "../components/Search/GridMovie";
 
 const SearchMovie = () => {
-    // Traemos los generos
+    // Traemos los generos y type serie (movie o tv)
     const genres = useSelector((state) => state.genresMovies);
+    const searchType = useSelector((state) => state.type)
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     // Traemos Peliculas mas populares
     const baseUrl = "https://api.themoviedb.org/3";
-    
     const [seriesOrMovies, getSeriesOrMovies] = useFetch(baseUrl);
-    const [searchType, setSearchType] = useState("tv");
-    
-    const path = `/trending/${searchType}/day`;
+
 
     // traemos la busqueda del usuario
     const [datos, getMovie, isSearchError] = useSearchMovie(searchType);
     const [inputValue, setInputValue] = useState("");
 
-    //TODO BUSCAR PELICULA EN SEARCH CREA UN ESTADO Y GUARDA EL VALOR ENVIADO POR EL USUARIO
-    useEffect(() => {
-        if (genres.length === 0) {
-            dispatch(fetchGenres());
-        }
+    const [userGenre, setUserGenre] = useState("");
 
-    }, []);
 
     useEffect(() => {
+        dispatch(fetchGenres(searchType));
+        const genreQueryParam = `with_genres=${userGenre}`;
+        const url = `/discover/${searchType}`;
+        const query = `${genreQueryParam}`;
 
-        getSeriesOrMovies(path);
-    }, [searchType])
-
+        getSeriesOrMovies(url, query); // Llama a getSeriesOrMovies con la
+    }, [searchType, userGenre]);
 
     const goSearch = (e) => {
         e.preventDefault();
         getMovie(inputValue);
-        setInputValue('')
+        setInputValue("");
     };
 
-    // ACA
     const handleNavigate = (id) => {
         navigate(`/${searchType}/${id}`);
     };
 
-
     return (
-        <div className='px-6 pt-[70px]'>
-            <div className="text-white text-sm mb-4 font-semibold w-full flex justify-around items-center">
-                <span className={`cursor-pointer ${searchType === 'tv' && 'text-[#b1a4fc]'}`} onClick={() => setSearchType('tv')}>Series</span>
-                <span className={`cursor-pointer ${searchType === 'movie' && 'text-[#b1a4fc]'}`} onClick={() => setSearchType('movie')}>Películas</span>
-            </div>
-
+        <div className='px-6 pt-[80px]'>
             <Input
                 text='¿Qué estás buscando?'
                 goSearch={goSearch}
@@ -69,31 +58,19 @@ const SearchMovie = () => {
 
             {/* GENEROS */}
             <div className='my-6'>
-                <SliderGenre genres={genres} />
+                <SliderGenre genres={genres} setUserGenre={setUserGenre} />
             </div>
 
             {/* MOSTRAR PELICULAS POPULARES */}
-            {!datos ? (
-                <div className='mt-10'>
-                    <h2 className='text-white font-semibold text-lg mb-6'>
-                        Búsquedas populares
-                    </h2>
-                    <GridMovie
-                        moviesToUse={seriesOrMovies}
-                        handleNavigate={handleNavigate}
-                    />
-                </div>
-            ) : (
-                <div className='mt-10'>
-                    <h2 className='text-white font-semibold text-lg mb-6'>
-                        Búsquedas populares
-                    </h2>
-                    <GridMovie
-                        moviesToUse={datos}
-                        handleNavigate={handleNavigate}
-                    />
-                </div>
-            )}
+            <div className='mt-10'>
+                <h2 className='text-white font-semibold text-lg mb-6'>
+                    Búsquedas populares
+                </h2>
+                <GridMovie
+                    moviesToUse={datos ? datos : seriesOrMovies}
+                    handleNavigate={handleNavigate}
+                />
+            </div>
         </div>
     );
 };

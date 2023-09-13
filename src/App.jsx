@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage'
 import { NavBar } from './components/Header/NavBar'
 import MovieForId from './pages/MovieForId'
 import SearchMovie from './pages/SearchMovie'
+import Footer from './components/Footer/Footer'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
 					{/* Ruta Detalles Movie */}
 					<Route path='/movie/:id' element={<MovieForId path={'/movie'}/>} />
 				</Routes>
+				<Footer/>
 			</div>
 	)
 }

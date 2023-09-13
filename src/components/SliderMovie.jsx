@@ -14,12 +14,37 @@ const SliderMovie = ({ movies, isMovie }) => {
     const navigate = useNavigate()
 
     const handleMovie = (id) => {
-        console.log(`${isMovie}/${id}`); 
+
         navigate(`${isMovie}/${id}`)
     }
 
+    const breakpoints = {
+        300: {
+            slidesPerView: 2,
+        },
+        600: {
+            slidesPerView: 3,
+        },
+        800: {
+            slidesPerView: 4,
+        },
+        1024: {
+            slidesPerView: 5,
+        },
+        1200: {
+            slidesPerView: 6,
+        },
+        1600: {
+            slidesPerView: 7
+        },
+        1800: {
+            slidesPerView: 8
+        }
+    };
+
+
     return (
-        <Swiper slidesPerView={2} spaceBetween={11} className='mySwiper'>
+        <Swiper breakpoints={breakpoints} spaceBetween={20} className='mySwiper'>
             {movies?.results.map((movie) => (
                 <SwiperSlide key={movie.id}>
                     <div

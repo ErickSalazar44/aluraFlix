@@ -7,7 +7,7 @@ const GridMovie = ({moviesToUse, handleNavigate}) => {
 
     return (
         <div className='grid' style={styleGrid}>
-            {moviesToUse?.results.map((movie) => (
+            {moviesToUse?.results?.map((movie) => (
                 <div
                     className="cursor-pointer  transition duration-300 filter saturate-[0.9] hover:saturate-[1.1] border-transparent border-2 hover:border-cyan-600"
                     key={movie.id}

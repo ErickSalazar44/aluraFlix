@@ -20,7 +20,6 @@ const MovieForId = ({ path }) => {
 
     const baseUrl = "https://api.themoviedb.org/3";
 
-
     const query = "append_to_response=videos";
 
     const [movie, getMovie, isError, loading] = useFetch(baseUrl);

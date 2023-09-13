@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import MovieSlider from "../components/Home/MovieSlider";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGenres } from "../store/slices/genresSlice";
-import { setMovies } from '../store/slices/homeSlice'
 import PublicityPage from "../components/Home/PublicityPage";
 import Slider from "../components/Slider";
 
@@ -26,10 +25,7 @@ const HomePage = () => {
     useEffect(() => {
         // almacenar la palicula y los generos en estado global
         if (!genres.length) {
-            dispatch(fetchGenres());
-        }
-        if (popularMovies) {
-            dispatch(setMovies(popularMovies))
+            dispatch(fetchGenres('tv'));
         }
     }, [genres, popularMovies]);
 
@@ -43,19 +39,21 @@ const HomePage = () => {
                 <>
                     {/* HOME HEADER  */}
                     <MovieSlider
-                        movies={popularMovies?.results.slice(0, 7)}
+                        movies={popularMovies?.results.slice(0, 10)}
                         genres={genres}
                     />
 
                     {/* ANUNCIO */}
-                    <section className='px-8 mt-8 mb-4 text-white'>
-                        <h4 className="font-semibold text-lg">Episodios Gratuitos</h4>
-                        <p className="opacity-80 text-sm">Emociónate con estrenos de películas y series icónicas.</p>
+                    <section className='px-8 md:px-10 lg:px-12 2xl:px-16 mt-8 text-white sm:text-center md:flex md:text-left md:gap-8 md:items-center md:flex-row-reverse md:justify-center'>
+                        <div className="mb-4">
+                            <h4 className="font-semibold text-lg lg:text-xl">Episodios Gratuitos</h4>
+                            <p className="opacity-80 text-sm lg:text-base">Emociónate con estrenos de películas y series icónicas.</p>
+                        </div>
+                        <PublicityPage url='/anuncio.avif' />
                     </section>
-                    <PublicityPage url='/anuncio.avif' />
 
                     {/* Body Slider Movie 1 */}
-                    <section className='px-8 my-8'>
+                    <section className='px-8 md:px-10 lg:px-12 2xl:px-16 my-8'>
                         <div className='mb-7'>
                             <Slider
                                 path='/movie/popular'
@@ -86,7 +84,7 @@ const HomePage = () => {
                     />
 
                     {/* Body Slider Movie 2 */}
-                    <section className='px-8 mt-8'>
+                    <section className='px-8 md:px-10 lg:px-12 2xl:px-16 mt-8'>
                         <div className='mb-7'>
                             <Slider
                                 path='/tv/top_rated'

@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 // import required modules
 import { Autoplay} from "swiper/modules";
 
-const SliderGenre = ({ genres }) => {
+const SliderGenre = ({ genres, setUserGenre }) => {
     return (
         <div className='text-white'>
             <Swiper
@@ -16,11 +16,12 @@ const SliderGenre = ({ genres }) => {
                 spaceBetween={20}
                 modules={[Autoplay]}
                 className='mySwiper'
-                autoplay={{ delay: 5000 }}
+                autoplay={{ delay: 4000 }}
             >
                 {genres?.map((genre) => (
                     <SwiperSlide
-                        className='text-sm cursor-pointer border-opacity-30 border border-white rounded-xl h-[30px] flex justify-center items-center'
+                        onClick={() => setUserGenre(genre.id)}
+                        className='text-xs cursor-pointer border-opacity-30 border border-white rounded-xl h-[30px] flex justify-center items-center'
                         key={genre.id}
                     >
                         {genre.name}

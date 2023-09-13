@@ -16,7 +16,8 @@ export default {
                 colorMenu: "#ffffffb3",
             },
             minHeight: {
-                homeSpaceFondo: "calc(85vh - 300px)",
+                homeSpaceFondo: "calc(75vh - 300px)",
+                homeSpaceFondoPC: "calc(75vh - 260px)",
             },
             backgroundColor: {
                 navbar: "#0f0f0f",
