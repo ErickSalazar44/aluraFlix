@@ -11,7 +11,7 @@ const useFetch = (baseUrl) => {
 
     // Optener datos de la api
     const getApi = (path, query) => {
-        const url = `${baseUrl}${path}?language=en-US&${query}`;
+        const url = `${baseUrl}${path}?language=es-ES&${query}`;
 
         const headers = {
             Accept: "application/json",

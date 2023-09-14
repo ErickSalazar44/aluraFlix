@@ -43,7 +43,7 @@ const MovieSlider = ({ movies, genres }) => {
     const navigate = useNavigate();
 
     const handleMovie = (id) => {
-        console.log(`/tv/${id}`);
+
         navigate(`/tv/${id}`);
     };
 

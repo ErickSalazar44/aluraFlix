@@ -10,7 +10,7 @@ function App() {
 
 	const fondo = {
 		backgroundColor: "#292929",
-		backgroundImage: "linear-gradient(to top, #01000a, #000000)",
+		backgroundImage: "linear-gradient(to top, #000000, #000000)",
 		backgroundSize: "cover",
 		backgroundRepeat: "repeat",
 	}

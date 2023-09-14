@@ -13,7 +13,7 @@ const useSearchMovie = (isMovie) => {
         const params = {
             query,
             include_adult: false,
-            language: "en-US",
+            language: "es-ES",
             page: 1,
         };
         const headers = {

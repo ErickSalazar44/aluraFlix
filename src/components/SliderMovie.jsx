@@ -54,6 +54,7 @@ const SliderMovie = ({ movies, isMovie }) => {
                         <img
                             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                             alt={movie.name}
+                            className="w-full min-h-[340px] lg:h-auto object-contain"
                         />
                     </div>
                 </SwiperSlide>

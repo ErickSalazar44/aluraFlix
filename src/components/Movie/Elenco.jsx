@@ -9,18 +9,43 @@ import "swiper/css/scrollbar";
 import { Scrollbar } from "swiper/modules";
 
 const Elenco = ({ elenco }) => {
+
+    const breakpoints = {
+        0: {
+            slidesPerView: 2
+        },
+        500: {
+            slidesPerView: 3
+        },
+        700: {
+            slidesPerView: 4
+        },
+        1024: {
+            slidesPerView: 5
+        },
+        1200: {
+            slidesPerView: 6
+        },
+        1400: {
+            slidesPerView: 7
+        },
+        1600: {
+            slidesPerView: 8
+        }
+    }
+
     return (
         <div className='overflow-hidden'>
             <h3 className='opacity-80 mb-4 text-lg'>Reparto de la serie</h3>
             <Swiper
-                slidesPerView={2}
+                breakpoints={breakpoints}
                 scrollbar={{
                     el: '.swiper-scrollbar',
                     hide: true,
                     dragSize: 100,
                     draggable: true,
                 }}
-                spaceBetween={20}
+                spaceBetween={10}
                 centeredSlides={false}
                 modules={[Scrollbar]}
                 className='mySwiper flex items-center justify-center'

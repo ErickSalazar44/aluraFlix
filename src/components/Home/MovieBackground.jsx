@@ -27,7 +27,6 @@ const MovieBackground = ({ movies, genreNamesByIds, currentIndex,handleMovie }) 
         };
     }, [movies, currentIndex]);
 
-    console.log(movies);
     return (
         <>
             <section

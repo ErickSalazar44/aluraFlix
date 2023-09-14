@@ -11,8 +11,8 @@ const obtenerProveedorDisponible = (disponibles) => {
 
 const renderProveedores = (proveedores) => {
     return (
-        <div className='rounded-2xl flex gap-4'>
-            {proveedores?.slice(0, 2).map((proveedor) => (
+        <div className='rounded-2xl flex flex-wrap gap-4'>
+            {proveedores?.slice(0, 10).map((proveedor) => (
                 <img
                     key={proveedor.provider_id}
                     className='rounded-2xl w-16'
@@ -35,7 +35,7 @@ const Providers = ({ providers }) => {
 
     return (
         proveedorDisponible && (
-            <div className='flex items-center gap-4 px-6 mt-8'>
+            <div className='flex flex-wrap items-center gap-4 px-6 md:px-10 lg:px-12 2xl:px-16 mt-8'>
                 <h3 className='font-semibold'>Plataformas disponibles </h3>
                 {proveedorDisponible?.buy
                     ? renderProveedores(proveedorDisponible.buy)

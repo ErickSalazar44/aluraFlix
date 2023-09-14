@@ -30,7 +30,7 @@ export const NavBar = () => {
     }, []);
 
     const headerClass =
-        scrollY > 100
+        scrollY > 50
             ? "bg-navbar translate-y-[0%]"
             : "bg-transparent -translate-y-full";
 
@@ -63,7 +63,7 @@ export const NavBar = () => {
                         onClick={() => console.log("ir a buscar peliculas")}
                     >
                         <Link to='/search'>
-                            <GoSearch className="w-[24px] h-[24px] cursor-pointer text-neutral-400 " />
+                            <GoSearch className="w-[24px] h-[24px] cursor-pointer text-neutral-100 " />
                         </Link>
                     </div>
                 </nav>

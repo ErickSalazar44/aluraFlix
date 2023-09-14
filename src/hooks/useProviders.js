@@ -8,7 +8,7 @@ const useProviders = (isMovie) => {
     const apiKey = "617b8b681bdb0227b53464f2d357d8e1";
     // Optener datos de la api
     const getProviders = (id) => {
-        const url = `${urlBase}${id}/watch/providers?api_key=${apiKey}&language=es-ES&locale=US`;
+        const url = `${urlBase}${id}/watch/providers?api_key=${apiKey}&language=es-ES&locale=ES`;
         axios
             .get(url)
             .then((res) => {

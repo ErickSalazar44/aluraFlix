@@ -48,7 +48,7 @@ const SearchMovie = () => {
     };
 
     return (
-        <div className='px-6 pt-[80px]'>
+        <div className='px-8 md:px-10 lg:px-12 2xl:px-16 pt-[80px]'>
             <Input
                 text='¿Qué estás buscando?'
                 goSearch={goSearch}

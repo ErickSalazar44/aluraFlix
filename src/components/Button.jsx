@@ -1,11 +1,23 @@
 import {PiVideo} from 'react-icons/pi'
-
+import './style/btn.css'
+import { useNavigate } from 'react-router-dom'
 const Button = ({text}) => {
+
+  const navigate = useNavigate()
+
   return (
-    <button className="flex items-center gap-3 text-lg font-semibold bg-btn py-[10px] px-[22px] rounded min-w-[144px]">
-      <PiVideo size={24} color='white'/>
-      {text}
-    </button>
+    <div className='transition-all duration-500'>
+      <button
+        onClick={() => navigate('/search')}
+        className="custom-button"
+      >
+        <span className='relative z-10'>
+          <PiVideo size={24} color='white' />
+        </span>
+        <span className='relative z-10'>{text}</span>
+        
+      </button>
+    </div>
   )
 }
 

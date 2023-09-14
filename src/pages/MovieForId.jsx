@@ -56,26 +56,23 @@ const MovieForId = ({ path }) => {
 
     const [playing, setPlaying] = useState(false)
 
-
-
-
     return (
         <article className='text-white'>
             {/* header */}
             <HeaderMovie movie={movie} setPlaying={setPlaying}/>
 
             {/* BODY */}
-            <div className='px-6 mb-8'>
+            <div className='px-6 md:px-10 lg:px-12 2xl:px-16 mb-8'>
                 <div className='w-full py-5'>
                     <h2 className='font-semibold text-titulo'>
                         {path === '/movie'
                             ? movie?.title
                             : movie?.original_name}
                     </h2>
-                    <div className=" mt-2 text-xs opacity-80 font-light flex gap-4">
+                    <div className=" mt-2 text-xs opacity-80 font-light flex gap-4 md:text-sm">
                         {
                             movie?.runtime 
-                            ? <span className="block">{`${handleTimeMovie(movie?.runtime).horas} H ${handleTimeMovie(movie?.runtime).minutos} MIN`}</span>
+                            ? <span className="block ">{`${handleTimeMovie(movie?.runtime).horas} H ${handleTimeMovie(movie?.runtime).minutos} MIN`}</span>
                             : (
                                 <>
                                     <span className="block">{movie?.number_of_episodes} Episodios</span> 
@@ -94,19 +91,19 @@ const MovieForId = ({ path }) => {
                 </div>
 
                 <div className="opacity-80 ">
-                    {/* <h3 className='text-[16px] font-semibold mb-2'>
-                        Synopsis
-                    </h3> */}
-                    <p className='text-sm '>{movie?.overview}</p>
+                    <h3 className='text-[16px] font-semibold mb-2'>
+                        {movie?.tagline ? movie?.tagline : 'Synopsis'}
+                    </h3>
+                    <p className='text-sm md:text-base lg:max-w-[900px]'>{movie?.overview}</p>
                 </div>
             </div>
             {/* Categorias */}
 
-            <div className="px-6 mt-8">
+            <div className="px-6 md:px-10 lg:px-12 2xl:px-16 mt-8">
                 <ul className="flex gap-4 opacity-80 flex-wrap">
                     {
                         movie?.genres.map(genre => (
-                            <li className="border px-3 py-2 rounded-2xl" key={genre.id}>{genre.name}</li>
+                            <li className="border px-3 py-2 md:px-8 rounded-2xl" key={genre.id}>{genre.name}</li>
                         ))
                     }
                 </ul>
@@ -116,7 +113,7 @@ const MovieForId = ({ path }) => {
             {
                 movie?.homepage.length > 0 
                 ? 
-                <div className="px-6 mt-8 flex items-center gap-16">
+                <div className="px-6 md:px-10 lg:px-12 2xl:px-16 mt-8 flex items-center gap-16">
                     <a href={movie?.homepage} className="block w-[180px]">
                         <Button text='Home Page'/>
                     </a>
@@ -128,7 +125,7 @@ const MovieForId = ({ path }) => {
             {/* Reparto */}
                 {
                     (elenco && !isErrorElenco) &&
-                    <div className="px-6 mt-8">
+                    <div className="px-6 md:px-10 lg:px-12 2xl:px-16 mt-8">
                         <Elenco elenco={elenco}/>
                     </div>
                 }
@@ -166,7 +163,7 @@ const MovieForId = ({ path }) => {
 
             {/* Recomendacion  */}
 
-            <div className="px-6 mt-8">
+            <div className="px-6 md:px-10 lg:px-12 2xl:px-16 mt-8">
                 <Recomendaciones similares={similares} isMovie={path}/>
             </div>
 
