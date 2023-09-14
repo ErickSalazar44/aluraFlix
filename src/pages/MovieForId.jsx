@@ -91,10 +91,10 @@ const MovieForId = ({ path }) => {
                 </div>
 
                 <div className="opacity-80 ">
-                    <h3 className='text-[16px] font-semibold mb-2'>
+                    <h3 className='text-sm sm:text-base font-semibold mb-2'>
                         {movie?.tagline ? movie?.tagline : 'Synopsis'}
                     </h3>
-                    <p className='text-sm md:text-base lg:max-w-[900px]'>{movie?.overview}</p>
+                    <p className='text-xs sm:text-sm md:text-base lg:max-w-[900px]'>{movie?.overview}</p>
                 </div>
             </div>
             {/* Categorias */}

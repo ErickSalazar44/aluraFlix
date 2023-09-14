@@ -15,8 +15,10 @@ const Porcentaje = ({ movie }) => {
     const circunferencia = 2 * Math.PI * radio;
     const longitudDeRelleno = (`${percent}` / 100) * circunferencia;
 
+    console.log(movie)
+
     return (
-        <div className='relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 '>
+        <div className='cursor-context-menu relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 before:hover:opacity-100 before:transition-opacity before:opacity-0 before:text-xs before:rounded-sm before:py-1 before:px-2 before:bg-[#111] before:right-1/2 before:translate-x-1/2 before:-top-14 before:absolute before:content-["Puntuación_de_usuario"]'>
             <svg
                 width='100%'
                 height='100%'

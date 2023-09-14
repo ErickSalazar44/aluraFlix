@@ -21,7 +21,7 @@ const HeaderMovie = ({ movie, setPlaying }) => {
             <div className='bg-gradiant absolute top-0 left-0 w-full h-[101%]'></div>
             <Ligth img={url}/>
             <img
-                className='absolute z-10 rounded  bottom-8 left-6 w-[170px] sm:w-[200px] sm:bottom-4 sm:left-8 md:left-10 lg:w-[220px] xl:left-12 2xl:left-16 xl:w-[240px] object-contain'
+                className='absolute z-10 rounded bottom-4 left-6 w-[130px] movieId:w-[170px]  sm:w-[200px] sm:bottom-4 sm:left-8 md:left-10 lg:w-[220px] xl:left-12 2xl:left-16 xl:w-[240px] object-contain'
                 src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
                 alt={movie?.title}
             />

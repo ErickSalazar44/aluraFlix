@@ -27,6 +27,9 @@ export default {
             fontSize: {
                 titulo: "calc(.9em + 3vw)",
             },
+            screens: {
+                movieId: { min: "380px", max: "640px" },
+            },
         },
         plugins: [],
     },
