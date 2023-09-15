@@ -10,7 +10,7 @@ const MovieTrailer = ({ videoUrl, setPlaying, playing }) => {
     }
 
     return (
-        <div  className={`player-wrapper h-[333px] z-50 w-full  transition-all duration-500  ${playing ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
+        <div  className={`player-wrapper aspect-video max-w-3xl sm:max-w-4xl xl:max-w-6xl z-50 w-full  transition-all duration-500  ${playing ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
 
                 <ReactPlayer
                     ref={playerRef}

@@ -5,11 +5,13 @@ export default {
         extend: {
             backgroundImage: {
                 gradient:
-                    "linear-gradient(270deg, rgba(255, 255, 255, 0) -44.17%, rgb(5, 5, 5) 80.09%)",
+                    "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4990371148459384) 35%, rgba(0,0,0,0) 70%)",
                 gradiant:
                     "linear-gradient(to right, rgb(0 0 0) 20%, rgb(0 0 0 / 0%) 100%)",
                 yGradiant:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 70%, rgb(10, 10, 10, 40) 100.09%)",
+                yGradiantModal:
+                    "linear-gradient(180deg, rgba(255, 255, 255, 0) 10%, rgb(10, 10, 10, 100) 100.09%)",
             },
             colors: {
                 colorMenu: "#ffffffb3",

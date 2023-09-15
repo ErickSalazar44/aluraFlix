@@ -41,7 +41,7 @@ const HomePage = () => {
                 <>
                     {/* HOME HEADER  */}
                     <MovieSlider
-                        movies={popularMovies?.results.slice(0, 10)}
+                        movies={popularMovies?.results}
                         genres={genres}
                     />
 
@@ -49,7 +49,7 @@ const HomePage = () => {
                     <section className='px-8 md:px-10 lg:px-12 2xl:px-16 mt-8 text-white sm:text-center md:flex md:text-left md:gap-8 md:items-center md:flex-row-reverse md:justify-center xl:gap-20'>
                         <div className="mb-4 lg:mb-0">
                             <h4 className="font-semibold text-lg lg:text-xl xl:text-3xl xl:mb-2">Episodios Gratuitos</h4>
-                            <p className="opacity-80 text-sm md:mb-4 lg:text-base xl:text-lg lg:mb-8">¡Descubre la emoción en los estrenos de películas y series icónicas!</p>
+                            <p className="opacity-80 text-xs md:mb-4 lg:text-base xl:text-lg lg:mb-8">¡Descubre la emoción en los estrenos de películas y series icónicas!</p>
                             <div className="hidden md:block">
                                 <Button text='VER AHORA'/>
                             </div>
@@ -87,6 +87,7 @@ const HomePage = () => {
                             }
                             btn='Cátegoria'
                             tittle='¡Descubre el cine en casa con nosotros!'
+                            
                         />
                     </div>
                     <div className="hidden sm:block">

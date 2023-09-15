@@ -39,7 +39,7 @@ function Ligth({ img }) {
     }, [img]);
 
     const styleColor = {
-        backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, ${primaryColor} 300.09%)`,
+        backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, ${primaryColor} 200.09%)`,
     };
 
     return (

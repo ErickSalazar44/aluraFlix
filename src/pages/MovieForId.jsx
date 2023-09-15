@@ -64,7 +64,7 @@ const MovieForId = ({ path }) => {
             {/* BODY */}
             <div className='px-6 md:px-10 lg:px-12 2xl:px-16 mb-8'>
                 <div className='w-full py-5'>
-                    <h2 className='font-semibold text-titulo'>
+                    <h2 className='font-semibold text-titulo md:text-5xl md:mb-6'>
                         {path === '/movie'
                             ? movie?.title
                             : movie?.original_name}
@@ -141,8 +141,8 @@ const MovieForId = ({ path }) => {
             {
                 (playing) 
                 &&
-                <div className={`fixed top-0 z-40 grid place-items-center w-full min-h-full transition-all duration-500 `}>
-                    <div onClick={() => setPlaying(false) } className={`fixed w-full min-h-full bg-black z-50 opacity-90  transition-all duration-500`}></div>
+                <div className={`fixed top-0 z-40 grid place-items-center w-full  min-h-full transition-all duration-500 `}>
+                    <div onClick={() => setPlaying(false) } className={`fixed w-full min-h-full bg-black z-50 opacity-90 transition-all duration-500`}></div>
                     {
                         (movie.videos.results.length >= 1)
                         ?

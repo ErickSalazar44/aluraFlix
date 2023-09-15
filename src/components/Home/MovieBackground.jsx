@@ -27,6 +27,8 @@ const MovieBackground = ({ movies, genreNamesByIds, currentIndex,handleMovie }) 
         };
     }, [movies, currentIndex]);
 
+    console.log(movies)
+
     return (
         <>
             <section
@@ -35,7 +37,7 @@ const MovieBackground = ({ movies, genreNamesByIds, currentIndex,handleMovie }) 
                 <img
                     src={backgroundImage}
                     alt={movies?.[currentIndex]?.title}
-                    className='absolute z-[1] top-0 w-[90%] right-0 h-[85vh] object-cover saturate-[1.2]'
+                    className='absolute z-[1] top-0 w-[100%] right-0 h-[85vh] object-cover saturate-[1.2]'
                 />
 
                 <div className='px-8 md:px-10 lg:px-12 2xl:px-16 pb-8 z-10'>
@@ -45,12 +47,12 @@ const MovieBackground = ({ movies, genreNamesByIds, currentIndex,handleMovie }) 
                         <h2 className='text-white text-[1.875rem] font-semibold lg:text-[40px]'>
                             {movies?.[currentIndex]?.original_name}
                         </h2>
-                        <ul className='flex gap-4 text-white lg:text-lg lg:gap-6'>
+                        <ul className='flex text-xs movieId:text-sm gap-4 text-white lg:text-lg lg:gap-6'>
                             {genreNamesByIds?.slice(0, 3).map((genre) => (
                                 <li key={genre}>{genre}</li>
                             ))}
                         </ul>
-                        <span className='mt-6' onClick={() => handleMovie(movies?.[currentIndex])}>
+                        <span className='mt-6 w-[40px]' onClick={() => handleMovie(movies?.[currentIndex].id)}>
                             <CiPlay1 color='white' className="w-[36px] h-[36px] lg:w-[40px] lg:h-[40px] cursor-pointer"/>
                         </span>
                     </div>

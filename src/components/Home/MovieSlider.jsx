@@ -7,18 +7,42 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MovieBackground from "./MovieBackground";
 
-import { BiRightArrowAlt } from "react-icons/bi";
+import {
+    MdKeyboardArrowLeft,
+    MdOutlineKeyboardArrowRight,
+} from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 const MovieSlider = ({ movies, genres }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [showMovies, setShowMovies] = useState(8);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 1400) {
+                setShowMovies(16);
+            } else if (window.innerWidth >= 1024) {
+                setShowMovies(12);
+            } else if (window.innerWidth >= 700) {
+                setShowMovies(10);
+            } else {
+                setShowMovies(8);
+            }
+        };
+        window.addEventListener("resize", handleResize);
+        handleResize();
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [movies]);
 
     // manejador de slices
     const handleSlideChange = (swiper) => {
-        const newIndex = swiper.activeIndex;
+        const newIndex = swiper.realIndex;
         setCurrentIndex(newIndex);
     };
 
@@ -35,15 +59,9 @@ const MovieSlider = ({ movies, genres }) => {
             ? getGenreNamesByIds(genres, movies[currentIndex].genre_ids)
             : [];
 
-    const styleVerMas = {
-        backdropFilter: " blur(6px)",
-        backgroundColor: "rgba(24, 23, 23, 0.021)",
-    };
-
     const navigate = useNavigate();
 
     const handleMovie = (id) => {
-
         navigate(`/tv/${id}`);
     };
 
@@ -64,11 +82,11 @@ const MovieSlider = ({ movies, genres }) => {
             slidesPerView: 6,
         },
         1600: {
-            slidesPerView: 7
+            slidesPerView: 7,
         },
         1800: {
-            slidesPerView: 8
-        }
+            slidesPerView: 8,
+        },
     };
 
     return (
@@ -79,52 +97,56 @@ const MovieSlider = ({ movies, genres }) => {
                 genreNamesByIds={genreNamesByIds}
                 handleMovie={handleMovie}
             />
-            <div className='px-8 md:px-10 lg:px-12 2xl:px-16'>
+            <div className='px-8 md:px-10 lg:px-12 2xl:px-16 overflow-hidden'>
                 <h2 className='text-white text-[1.2rem] z-20 relative font-semibold mb-3'>
                     Últimas series
                 </h2>
-                <Swiper
-                    modules={[Pagination, Autoplay, Navigation]}
-                    spaceBetween={10}
-                    pagination={{
-                        clickable: true,
-                        el: ".swiper-paginacion",
-                        renderBullet: function (index, className) {
-                            return `<span class="${className} bg-white"></span>`;
-                        },
-                    }}
-                    breakpoints={breakpoints}
-                    onSlideChange={handleSlideChange}
-                    autoplay={{ delay: 5000 }}
-                >
-                    {movies?.map((movie) => (
-                        <SwiperSlide key={movie.id} className='w-full'>
-                            <div
-                                className='w-full cursor-pointer'
-                            >
-                                <img
-                                    src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
-                                    alt={movie.title}
-                                    className='h-auto w-[250px] sm:h-[270px] md:h-[280px] lg:w-[360px] object-contain rounded'
-                                    onClick={() => handleMovie(movie.id)}
-                                />
-                            </div>
-                        </SwiperSlide>
-                    ))}
 
-                    {/* VER MAS */}
-                    <SwiperSlide key={"ver-mas"} className='w-full'>
-                        <div
-                            style={styleVerMas}
-                            className='w-auto h-[250px] sm:h-[270px] md:h-[280px] lg:h-[311px] object-cover gap-2  text-white flex justify-center items-center'
-                        >
-                            <span>VER MAS</span>
-                            <BiRightArrowAlt />
-                        </div>
-                    </SwiperSlide>
-                </Swiper>
-                <span className='my-4 block'></span>
-                <div className='relative z-10 swiper-paginacion w-full text-center space-x-4'></div>
+                <div className='relative'>
+                    <Swiper
+                        pagination={{
+                            clickable: true,
+                            el: ".swiper-paginacion",
+                            renderBullet: function (index, className) {
+                                return `<span class="${className} bg-white"></span>`;
+                            },
+                        }}
+                        onSlideChange={(swiper) => handleSlideChange(swiper)}
+                        breakpoints={breakpoints}
+                        spaceBetween={10}
+                        loop={true}
+                        navigation={{
+                            nextEl: ".swiper-button-next",
+                            prevEl: ".swiper-button-prev",
+                        }}
+                        modules={[Pagination, Navigation, Autoplay]}
+                        className='mySwiper'
+                        autoplay={{ delay: 4500 }}
+                    >
+                        {movies?.slice(0, showMovies).map((movie) => (
+                            <SwiperSlide key={movie.id} className='w-full'>
+                                <div className='w-full cursor-pointer'>
+                                    <img
+                                        src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
+                                        alt={movie.title}
+                                        className='h-auto w-[250px] sm:h-[270px] md:h-[280px] lg:w-[360px] object-contain rounded'
+                                        onClick={() => handleMovie(movie.id)}
+                                    />
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                    <div className='swiper-button-next absolute top-1/2 -right-8 md:-right-9 transform -translate-y-1/2 w-8  text-white opacity-80 after:content-none'>
+                        <MdOutlineKeyboardArrowRight size={40} />
+                    </div>
+
+                    {/* Botón de retroceder */}
+                    <div className='swiper-button-prev absolute top-1/2 -left-8 md:-right-9 transform -translate-y-1/2 w-8 text-white opacity-80 after:content-none'>
+                        <MdKeyboardArrowLeft size={40} />
+                    </div>
+                    <span className='my-4 block'></span>
+                    <div className='relative z-10 swiper-paginacion w-full text-center space-x-4'></div>
+                </div>
             </div>
         </>
     );
