@@ -30,12 +30,12 @@ const Slider = ({ path, titulo, subtitulo, query, isMovie }) => {
             <div className='relative'>
                 <SliderMovie movies={movies} isMovie={isMovie} nextEl={nextEl } prevEl={prevEl}/>
                 {/* Botón Controller */}
-                <div ref={nextEl} className={` swiper-button-next absolute bottom-1/2 -right-8 transform -translate-y-1/2 w-8  text-white opacity-80 after:content-none`}>
+                <div ref={nextEl} className={` swiper-button-next absolute top-[60%] -right-8 transform -translate-y-1/2 w-8  text-white opacity-80 after:content-none`}>
                     <MdOutlineKeyboardArrowRight
                         size={40}
                     />
                 </div>
-                <div ref={prevEl} className={`swiper-button-prev absolute bottom-1/2 -left-8 transform -translate-y-1/2 w-8 text-white opacity-80 after:content-none`}>
+                <div ref={prevEl} className={`swiper-button-prev absolute top-[60%] -left-8 transform -translate-y-1/2 w-8 text-white opacity-80 after:content-none`}>
                     <MdKeyboardArrowLeft size={40} />
                 </div>
             </div>

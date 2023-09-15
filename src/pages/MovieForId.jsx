@@ -163,7 +163,7 @@ const MovieForId = ({ path }) => {
 
             {/* Recomendacion  */}
 
-            <div className="px-6 md:px-10 lg:px-12 2xl:px-16 mt-8">
+            <div className="px-6 md:px-10 lg:px-12 2xl:px-16 mt-8 overflow-hidden">
                 <Recomendaciones similares={similares} isMovie={path}/>
             </div>
 
