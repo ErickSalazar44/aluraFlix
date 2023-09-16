@@ -4,9 +4,8 @@ import { useState } from "react";
 const useSearchMovie = (isMovie) => {
     const [infoApi, setInfoApi] = useState(null);
     const [isError, setIsError] = useState(false);
+    const [loading, setLoading] = useState(false);
     const url = `https://api.themoviedb.org/3/search/${isMovie}`;
-    const token =
-        "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MTdiOGI2ODFiZGIwMjI3YjUzNDY0ZjJkMzU3ZDhlMSIsInN1YiI6IjY0ZjYwOWYzZWJiOTlkMDExZTBiNmUwZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qcqXt8lOPeki5sxBQhLiWMp_OLjztLp2_4Pd95uaWTg";
 
     // Optener datos de la api
     const getSearchMovie = (query) => {
@@ -18,9 +17,9 @@ const useSearchMovie = (isMovie) => {
         };
         const headers = {
             Accept: "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${import.meta.env.VITE_API_URL}`,
         };
-
+        setLoading(true);
         axios
             .get(url, { params, headers })
             .then((res) => {
@@ -30,10 +29,15 @@ const useSearchMovie = (isMovie) => {
             .catch((err) => {
                 console.error(`Error en la solicitud: ${err}`);
                 setIsError(true);
-            });
+            })
+            .finally(() => setLoading(false));
     };
 
-    return [infoApi, getSearchMovie, isError];
+    const resetValue = (params) => {
+        setInfoApi(params);
+    };
+
+    return [infoApi, getSearchMovie, isError, resetValue, loading];
 };
 
 export default useSearchMovie;

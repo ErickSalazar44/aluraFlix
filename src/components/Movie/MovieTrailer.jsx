@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import ReactPlayer from "react-player";
 
 const MovieTrailer = ({ videoUrl, setPlaying, playing }) => {

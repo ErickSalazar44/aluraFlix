@@ -4,13 +4,21 @@ import { useState } from "react";
 const useProviders = (isMovie) => {
     const [infoApi, setInfoApi] = useState(null);
     const [isError, setIsError] = useState(false);
+    const [loading, setLoading] = useState(false);
+
     const urlBase = `https://api.themoviedb.org/3/${isMovie}/`;
-    const apiKey = "617b8b681bdb0227b53464f2d357d8e1";
+
     // Optener datos de la api
     const getProviders = (id) => {
-        const url = `${urlBase}${id}/watch/providers?api_key=${apiKey}&language=es-ES&locale=ES`;
+        const url = `${urlBase}${id}/watch/providers?language=es-ES&locale=ES`;
+
+        const headers = {
+            Accept: "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_API_URL}`,
+        };
+        setLoading(true);
         axios
-            .get(url)
+            .get(url, { headers })
             .then((res) => {
                 setInfoApi(res.data);
                 setIsError(false);
@@ -18,10 +26,11 @@ const useProviders = (isMovie) => {
             .catch((err) => {
                 console.error(`Error en la solicitud: ${err}`);
                 setIsError(true);
-            });
+            })
+            .finally(() => setLoading(false));
     };
 
-    return [infoApi, getProviders, isError];
+    return [infoApi, getProviders, isError, loading];
 };
 
 export default useProviders;

@@ -13,23 +13,19 @@ const Recomendaciones = ({ similares, isMovie }) => {
     const prevEl = useRef(null);
 
     return (
-        <div>
+        <div className="mx-auto max-w-[1280px]">
             <h2 className='font-base mb-3 opacity-80 text-lg'>
                 Más contenido como este
             </h2>
             <div className='relative'>
                 {/* Botón Controller */}
-                <SliderMovie movies={similares} isMovie={isMovie} nextEl={nextEl} prevEl={prevEl}/>
-                <div
-                    ref={nextEl}
-                    className={` swiper-button-next absolute top-[60%] -right-6 transform -translate-y-1/2 w-8  text-white opacity-80 after:content-none`}
-                >
-                    <MdOutlineKeyboardArrowRight size={40} />
+                <SliderMovie movies={similares} isMovie={isMovie} nextEl={nextEl} prevEl={prevEl} pageId={true}/>
+                <div ref={nextEl} className={` swiper-button-next absolute top-[60%] -right-8 transform -translate-y-1/2 w-8  text-white opacity-80 after:content-none`}>
+                    <MdOutlineKeyboardArrowRight
+                        size={40}
+                    />
                 </div>
-                <div
-                    ref={prevEl}
-                    className={`swiper-button-prev absolute top-[60%] -left-6 transform -translate-y-1/2 w-8 text-white opacity-80 after:content-none`}
-                >
+                <div ref={prevEl} className={`swiper-button-prev absolute top-[60%] -left-8 transform -translate-y-1/2 w-8 text-white opacity-80 after:content-none`}>
                     <MdKeyboardArrowLeft size={40} />
                 </div>
             </div>

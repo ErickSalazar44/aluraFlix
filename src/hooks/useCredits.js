@@ -4,13 +4,22 @@ import { useState } from "react";
 const useCredits = (isMovie) => {
     const [infoApi, setInfoApi] = useState(null);
     const [isError, setIsError] = useState(false);
+    const [loading, setLoading] = useState(false);
     const urlBase = `https://api.themoviedb.org/3/${isMovie}/`;
-    const apiKey = "617b8b681bdb0227b53464f2d357d8e1";
+
     // Optener datos de la api
     const getCast = (id) => {
-        const url = `${urlBase}${id}/credits?api_key=${apiKey}&language=es-ES&locale=US`;
+        const url = `${urlBase}${id}/credits?language=es-ES&locale=US`;
+
+        const headers = {
+            Accept: "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_API_URL}`,
+        };
+
+        setLoading(true);
+
         axios
-            .get(url)
+            .get(url, { headers })
             .then((res) => {
                 setInfoApi(res.data);
                 setIsError(false);
@@ -18,10 +27,11 @@ const useCredits = (isMovie) => {
             .catch((err) => {
                 console.error(`Error en la solicitud: ${err}`);
                 setIsError(true);
-            });
+            })
+            .finally(() => setLoading(false));
     };
 
-    return [infoApi, getCast, isError];
+    return [infoApi, getCast, isError, loading];
 };
 
 export default useCredits;

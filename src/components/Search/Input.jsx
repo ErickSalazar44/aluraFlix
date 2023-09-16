@@ -1,11 +1,8 @@
 import { GoSearch } from "react-icons/go";
-export const Input = ({text, inputValue, setInputValue, goSearch}) => {
-
-
+export const Input = ({ text, inputValue, setInputValue, goSearch }) => {
     const handleValueInput = (value) => {
-        setInputValue(value)
-    }
-
+        setInputValue(value);
+    };
 
     return (
         <form className='relative w-full md:mt-6' onSubmit={(e) => goSearch(e)}>

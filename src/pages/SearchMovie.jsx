@@ -7,26 +7,26 @@ import useSearchMovie from "../hooks/useSearchMovie";
 import SliderGenre from "../components/Search/SliderGenre";
 import { Input } from "../components/Search/Input";
 import GridMovie from "../components/Search/GridMovie";
+import LoadingSearch from "../components/Loading/SearchMovie/LoadingSearch";
 
 const SearchMovie = () => {
     // Traemos los generos y type serie (movie o tv)
     const genres = useSelector((state) => state.genresMovies);
-    const searchType = useSelector((state) => state.type)
+    const searchType = useSelector((state) => state.type);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     // Traemos Peliculas mas populares
     const baseUrl = "https://api.themoviedb.org/3";
-    const [seriesOrMovies, getSeriesOrMovies] = useFetch(baseUrl);
-
+    const [seriesOrMovies, getSeriesOrMovies, isError, loading] =
+        useFetch(baseUrl);
 
     // traemos la busqueda del usuario
-    const [datos, getMovie, isSearchError] = useSearchMovie(searchType);
+    const [datos, getMovie, , resetValue, loadingSearchUser] = useSearchMovie(searchType);
     const [inputValue, setInputValue] = useState("");
 
     const [userGenre, setUserGenre] = useState("");
-
 
     useEffect(() => {
         dispatch(fetchGenres(searchType));
@@ -35,6 +35,8 @@ const SearchMovie = () => {
         const query = `${genreQueryParam}`;
 
         getSeriesOrMovies(url, query); // Llama a getSeriesOrMovies con la
+
+        resetValue(null)
     }, [searchType, userGenre]);
 
     const goSearch = (e) => {
@@ -47,30 +49,40 @@ const SearchMovie = () => {
         navigate(`/${searchType}/${id}`);
     };
 
+    if (loading || loadingSearchUser) {
+        return <LoadingSearch />;
+    }
+
     return (
         <div className='px-8 md:px-10 lg:px-12 2xl:px-16 pt-[80px]'>
-            <Input
-                text='¿Qué estás buscando?'
-                goSearch={goSearch}
-                inputValue={inputValue}
-                setInputValue={setInputValue}
-            />
-
-            {/* GENEROS */}
-            <div className='my-6'>
-                <SliderGenre genres={genres} setUserGenre={setUserGenre} />
-            </div>
-
-            {/* MOSTRAR PELICULAS POPULARES */}
-            <div className='mt-10'>
-                <h2 className='text-white font-semibold text-lg mb-6'>
-                    Búsquedas populares
-                </h2>
-                <GridMovie
-                    moviesToUse={datos ? datos : seriesOrMovies}
-                    handleNavigate={handleNavigate}
-                />
-            </div>
+            {isError && <p>Hubo un error al cargar las peliculas</p>}
+            {!loading && !isError && (
+                <>
+                    <Input
+                        text='¿Qué estás buscando?'
+                        goSearch={goSearch}
+                        inputValue={inputValue}
+                        setInputValue={setInputValue}
+                    />
+                    {/* GENEROS */}
+                    <div className='my-6'>
+                        <SliderGenre
+                            genres={genres}
+                            setUserGenre={setUserGenre}
+                        />
+                    </div>
+                    {/* MOSTRAR PELICULAS POPULARES */}
+                    <div className='mt-10'>
+                        <h2 className='text-white font-semibold text-lg mb-6'>
+                            Búsquedas populares
+                        </h2>
+                        <GridMovie
+                            moviesToUse={datos ? datos : seriesOrMovies}
+                            handleNavigate={handleNavigate}
+                        />
+                    </div>
+                </>
+            )}
         </div>
     );
 };

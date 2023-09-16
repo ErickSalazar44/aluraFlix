@@ -16,7 +16,7 @@ const renderProveedores = (proveedores) => {
                 <img
                     key={proveedor.provider_id}
                     className='rounded-2xl w-16'
-                    src={`https://image.tmdb.org/t/p/w500/${proveedor.logo_path}`}
+                    src={proveedor?.logo_path ? `https://image.tmdb.org/t/p/w500/${proveedor.logo_path}` : '/noImage.avif'}
                     alt={`${proveedor.provider_name}`}
                 />
             ))}
@@ -35,7 +35,7 @@ const Providers = ({ providers }) => {
 
     return (
         proveedorDisponible && (
-            <div className='flex flex-wrap items-center gap-4 px-6 md:px-10 lg:px-12 2xl:px-16 mt-8'>
+            <div className='flex relative z-30 flex-wrap items-center gap-4 px-6 md:px-10 lg:px-12 2xl:px-16 mt-8 max-w-[1400px] mx-auto'>
                 <h3 className='font-semibold'>Plataformas disponibles </h3>
                 {proveedorDisponible?.buy
                     ? renderProveedores(proveedorDisponible.buy)

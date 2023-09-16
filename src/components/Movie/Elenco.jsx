@@ -28,13 +28,7 @@ const Elenco = ({ elenco }) => {
         },
         1200: {
             slidesPerView: 6,
-        },
-        1400: {
-            slidesPerView: 7,
-        },
-        1600: {
-            slidesPerView: 8,
-        },
+        }
     };
 
     const openModal = (index) => {
@@ -42,14 +36,11 @@ const Elenco = ({ elenco }) => {
         setModal(true);
     };
 
-    console.log(indexModal);
-
     return (
         <div className='overflow-hidden'>
             <h3 className='opacity-80 mb-4 text-lg'>Reparto de la serie</h3>
             <Swiper
                 breakpoints={breakpoints}
-                loop={true}
                 scrollbar={{
                     el: ".swiper-scrollbar",
                     hide: true,
@@ -64,31 +55,27 @@ const Elenco = ({ elenco }) => {
                 <div className='swiper-scrollbar bg-white opacity-0'></div>
                 {elenco?.cast?.slice(0, 10).map((actor, i) => {
                     return (
-                        <>
-                            <div key={`${actor.id}`}>
-                                <SwiperSlide key={actor.id}>
-                                    <div
-                                        onClick={() => openModal(i)}
-                                        className='relative max-w-[170px] overflow-hidden  rounded-xl'
-                                    >
-                                        <div className='absolute w-full h-full bg-yGradiant opacity-80'></div>
-                                        <img
-                                            className='my-0 mx-auto  rounded-xl w-full  object-contain'
-                                            src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
-                                            alt={actor.original_name}
-                                            onError={(e) => {
-                                                e.target.onError = null;
-                                                e.target.src = '/noImage.avif'
-                                                e.target.style.pointerEvents = "none"
-                                            }}
-                                        />
-                                        <p className='font-semibold w-full absolute bottom-2 text-center'>
-                                            {actor.name}
-                                        </p>
-                                    </div>
-                                </SwiperSlide>
+                        <SwiperSlide key={actor.id}>
+                            <div
+                                onClick={() => openModal(i)}
+                                className='relative max-w-[170px] overflow-hidden  rounded-xl'
+                            >
+                                <div className='absolute w-full h-full bg-yGradiant opacity-80'></div>
+                                <img
+                                    className='my-0 mx-auto  rounded-xl w-full  object-contain'
+                                    src={actor?.profile_path ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}` : 'noImage.avif'}
+                                    alt={actor.original_name}
+                                    onError={(e) => {
+                                        e.target.onError = null;
+                                        e.target.src = "/noImage.avif";
+                                        e.target.style.pointerEvents = "none";
+                                    }}
+                                />
+                                <p className='font-semibold w-full absolute bottom-2 text-center'>
+                                    {actor.name}
+                                </p>
                             </div>
-                        </>
+                        </SwiperSlide>
                     );
                 })}
             </Swiper>
@@ -102,7 +89,7 @@ const Elenco = ({ elenco }) => {
                         <div className='absolute w-full h-full bg-yGradiantModal opacity-80'></div>
                         <img
                             className='w-[300px] md:w-[350px] rounded'
-                            src={`https://image.tmdb.org/t/p/w500/${elenco?.cast[indexModal].profile_path}`}
+                            src={elenco?.cast?.[indexModal].profile_path ? `https://image.tmdb.org/t/p/w500/${elenco?.cast[indexModal].profile_path}` : '/noImage.avif'}
                             alt=''
                         />
                         <div className='absolute bottom-4'>

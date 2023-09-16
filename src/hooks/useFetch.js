@@ -6,16 +6,13 @@ const useFetch = (baseUrl) => {
     const [isError, setIsError] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const token =
-        "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MTdiOGI2ODFiZGIwMjI3YjUzNDY0ZjJkMzU3ZDhlMSIsInN1YiI6IjY0ZjYwOWYzZWJiOTlkMDExZTBiNmUwZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qcqXt8lOPeki5sxBQhLiWMp_OLjztLp2_4Pd95uaWTg";
-
     // Optener datos de la api
     const getApi = (path, query) => {
         const url = `${baseUrl}${path}?language=es-ES&${query}`;
 
         const headers = {
             Accept: "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${import.meta.env.VITE_API_URL}`,
         };
 
         setLoading(true);

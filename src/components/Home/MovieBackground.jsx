@@ -1,44 +1,56 @@
 import { useEffect, useState } from "react";
 import { CiPlay1 } from "react-icons/ci";
+import { viewNavigate } from "../../utils/animationNavigate";
 
-const MovieBackground = ({ movies, genreNamesByIds, currentIndex,handleMovie }) => {
+const MovieBackground = ({
+    movies,
+    genreNamesByIds,
+    currentIndex,
+    navigate
+}) => {
     const [backgroundImage, setBackgroundImage] = useState(
         `https://image.tmdb.org/t/p/w780${movies?.[currentIndex]?.poster_path}`
     );
 
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth >= 1024) {
-                setBackgroundImage(
-                    `https://image.tmdb.org/t/p/original${movies?.[currentIndex]?.backdrop_path}`
-                );
-            } else {
-                setBackgroundImage(
-                    `https://image.tmdb.org/t/p/w780${movies?.[currentIndex]?.poster_path}`
-                );
-            }
-        };
-
-        window.addEventListener("resize", handleResize);
-        handleResize();
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
+        if (movies) {
+            const handleResize = () => {
+                if (window.innerWidth >= 1024) {
+                    setBackgroundImage(
+                        `https://image.tmdb.org/t/p/original${movies?.[currentIndex]?.backdrop_path}`
+                    );
+                } else {
+                    setBackgroundImage(
+                        `https://image.tmdb.org/t/p/w780${movies?.[currentIndex]?.poster_path}`
+                    );
+                }
+            };
+    
+            window.addEventListener("resize", handleResize);
+            handleResize();
+    
+            return () => {
+                window.removeEventListener("resize", handleResize);
+            };
+        }
     }, [movies, currentIndex]);
-
-    console.log(movies)
 
     return (
         <>
             <section
                 className={`flex flex-col relative pt-[80px] after:content-[''] after:absolute after:inset-0 after:z-[1] after:bg-gradient after:h-[85vh]`}
             >
-                <img
-                    src={backgroundImage}
-                    alt={movies?.[currentIndex]?.title}
-                    className='absolute z-[1] top-0 w-[100%] right-0 h-[85vh] object-cover saturate-[1.2]'
-                />
+                <div className="w-full top-0 right-0 h-[85vh] absolute z-[1]">
+                    <img
+                        src={movies?.[currentIndex].poster_path ? backgroundImage: '/noImage.avif'}
+                        alt={movies?.[currentIndex]?.title}
+                        className='absolute z-[1] top-0 w-[100vw] right-0 h-[85vh] min-w-full object-cover saturate-[1.2]'
+                        onLoad={(e) => {
+                            e.target.style.opacity = 1; 
+                        }}
+                        style={{ opacity: 0, transition: 'opacity 0.5s' }}
+                    />
+                </div>
 
                 <div className='px-8 md:px-10 lg:px-12 2xl:px-16 pb-8 z-10'>
                     <div
@@ -52,8 +64,16 @@ const MovieBackground = ({ movies, genreNamesByIds, currentIndex,handleMovie }) 
                                 <li key={genre}>{genre}</li>
                             ))}
                         </ul>
-                        <span className='mt-6 w-[40px]' onClick={() => handleMovie(movies?.[currentIndex].id)}>
-                            <CiPlay1 color='white' className="w-[36px] h-[36px] lg:w-[40px] lg:h-[40px] cursor-pointer"/>
+                        <span
+                            className='mt-6 w-[40px]'
+                            onClick={() =>
+                                viewNavigate(movies?.[currentIndex].id, navigate)
+                            }
+                        >
+                            <CiPlay1
+                                color='white'
+                                className='w-[36px] h-[36px] lg:w-[40px] lg:h-[40px] cursor-pointer'
+                            />
                         </span>
                     </div>
                 </div>

@@ -7,7 +7,7 @@ function Ligth({ img }) {
     useEffect(() => {
         let isMounted = true; // Variable para rastrear si el componente está montado
 
-        if (img) {
+        if (img && !img.includes('undefined')) {
             const image = new Image();
             image.crossOrigin = "Anonymous"; // Para evitar problemas de CORS
             image.src = img;
@@ -24,7 +24,7 @@ function Ligth({ img }) {
                             ? palette.Muted.getHex()
                             : null;
 
-                        // Establece el segundo color dominante como color secundario
+                        // Establece el segundo color dominante como color
                         if (mutedColors) {
                             setPrimaryColor(mutedColors);
                         }
@@ -34,17 +34,17 @@ function Ligth({ img }) {
 
         // Función de limpieza
         return () => {
-            isMounted = false; // Indica que el componente se ha desmontado
+            isMounted = false; 
         };
     }, [img]);
 
     const styleColor = {
-        backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, ${primaryColor} 200.09%)`,
+        backgroundImage: `linear-gradient(310deg, rgba(255, 255, 255, 0) 20%, ${primaryColor} 300%)`,
     };
 
     return (
         <div
-            className='bg-gradiant absolute top-0 left-0 w-full h-[100%] opacity-60'
+            className='bg-gradiant absolute top-0 left-0 w-full h-full opacity-60'
             style={styleColor}
         ></div>
     );

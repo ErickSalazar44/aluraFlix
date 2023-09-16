@@ -15,6 +15,7 @@ import {
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { viewNavigate } from "../../utils/animationNavigate";
 
 const MovieSlider = ({ movies, genres }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -61,10 +62,6 @@ const MovieSlider = ({ movies, genres }) => {
 
     const navigate = useNavigate();
 
-    const handleMovie = (id) => {
-        navigate(`/tv/${id}`);
-    };
-
     const breakpoints = {
         300: {
             slidesPerView: 2,
@@ -95,7 +92,7 @@ const MovieSlider = ({ movies, genres }) => {
                 movies={movies}
                 currentIndex={currentIndex}
                 genreNamesByIds={genreNamesByIds}
-                handleMovie={handleMovie}
+                navigate={navigate}
             />
             <div className='px-8 md:px-10 lg:px-12 2xl:px-16 overflow-hidden'>
                 <h2 className='text-white text-[1.2rem] z-20 relative font-semibold mb-3'>
@@ -120,17 +117,18 @@ const MovieSlider = ({ movies, genres }) => {
                             prevEl: ".swiper-button-prev",
                         }}
                         modules={[Pagination, Navigation, Autoplay]}
-                        className='mySwiper'
+                        className='mySwiper overflow-hidden'
                         autoplay={{ delay: 4500 }}
                     >
                         {movies?.slice(0, showMovies).map((movie) => (
                             <SwiperSlide key={movie.id} className='w-full'>
                                 <div className='w-full cursor-pointer'>
                                     <img
-                                        src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
+                                        src={movie?.poster_path ? `https://image.tmdb.org/t/p/w500/${movie?.poster_path}` : '/noImage.avif'}
                                         alt={movie.title}
                                         className='h-auto w-[250px] sm:h-[270px] md:h-[280px] lg:w-[360px] object-contain rounded'
-                                        onClick={() => handleMovie(movie.id)}
+                                        onClick={() => viewNavigate(`/tv/${movie.id}`, navigate)}
+                                        style={{viewTransitionName: `imagen${movie.id}`}}
                                     />
                                 </div>
                             </SwiperSlide>
