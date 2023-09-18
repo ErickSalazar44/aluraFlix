@@ -35,7 +35,7 @@ const Providers = ({ providers }) => {
 
     return (
         proveedorDisponible && (
-            <div className='flex relative z-30 flex-wrap items-center gap-4 px-6 md:px-10 lg:px-12 2xl:px-16 mt-8 max-w-[1400px] mx-auto'>
+            <div className='flex flex-wrap items-center gap-4 px-6 md:px-10 lg:px-12 2xl:px-16 mt-8 max-w-[1400px] mx-auto'>
                 <h3 className='font-semibold'>Plataformas disponibles </h3>
                 {proveedorDisponible?.buy
                     ? renderProveedores(proveedorDisponible.buy)
