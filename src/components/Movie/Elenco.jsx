@@ -64,7 +64,7 @@ const Elenco = ({ elenco }) => {
                                 <img
                                     className='my-0 mx-auto  rounded-xl w-full  object-contain'
                                     src={actor?.profile_path ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}` : 'noImage.avif'}
-                                    alt={actor.original_name}
+                                    alt={actor?.original_name}
                                     onError={(e) => {
                                         e.target.onError = null;
                                         e.target.src = "/noImage.avif";
@@ -90,7 +90,7 @@ const Elenco = ({ elenco }) => {
                         <img
                             className='w-[300px] md:w-[350px] rounded'
                             src={elenco?.cast?.[indexModal].profile_path ? `https://image.tmdb.org/t/p/w500/${elenco?.cast[indexModal].profile_path}` : '/noImage.avif'}
-                            alt=''
+                            alt={elenco?.cast?.[indexModal].original_name}
                         />
                         <div className='absolute bottom-4'>
                             <p>{elenco?.cast[indexModal].character}</p>

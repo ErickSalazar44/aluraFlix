@@ -52,7 +52,7 @@ const SliderMovie = ({ movies, isMovie, nextEl, prevEl, pageId }) => {
                     <div className='cursor-pointer transition duration-300 filter saturate-[0.9] hover:saturate-[1.1] border-transparent border-4 hover:border-cyan-600'>
                         <img
                             src={ movie?.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : '/noImage.avif'}
-                            alt={movie.name}
+                            alt={movie?.name}
                             className='w-full aspect-[9/13] lg:h-72 object-cover'
                             onError={(e) => {
                                 e.target.onError = null;

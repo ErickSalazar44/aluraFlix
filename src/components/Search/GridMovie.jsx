@@ -8,7 +8,7 @@ const GridMovie = ({moviesToUse, handleNavigate}) => {
                 >
                     <img
                         src={movie?.poster_path ? `https://image.tmdb.org/t/p/w780${movie.poster_path}` : '/noImage.avif'}
-                        alt={movie.name}
+                        alt={movie?.name}
                         className='rounded w-full aspect-[9/12]'
                         onError={(e) => {
                             e.target.onError = null;
