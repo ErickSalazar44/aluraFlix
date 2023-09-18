@@ -8,6 +8,7 @@ import Slider from "../components/Slider";
 import Button from "../components/Button";
 import PublicityPage2 from "../components/Home/PublicityPage2";
 import LoadingHome from "../components/Loading/HomeMovie/LoadingHome";
+import { setHomeValue } from "../store/slices/homeMovieSlice";
 
 const HomePage = () => {
     // Series mas populares
@@ -29,6 +30,7 @@ const HomePage = () => {
         if (!genres.length) {
             dispatch(fetchGenres("tv"));
         }
+        dispatch(setHomeValue(popularMovies))
     }, [genres, popularMovies]);
 
     if (loading) {

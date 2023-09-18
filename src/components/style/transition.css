@@ -5,14 +5,6 @@
 .full-title {
   view-transition-name: full-title;
 }
-::view-transition-old(full-embed){
-  mix-blend-mode: normal;
-  animation-duration: 0.3s;
-}
-::view-transition-new(full-embed) {
-  animation: none;
-  mix-blend-mode: normal;
-}
 
 ::view-transition-old(root),
 ::view-transition-new(root) {

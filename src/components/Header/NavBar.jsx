@@ -98,7 +98,7 @@ export const NavBar = () => {
                 </nav>
             </header>
             <div
-                className={`text-colorMenu transition-all duration-500  z-50 fixed left-0 top-0 w-64 px-6 lg:w-96 lg:px-10 2xl:px-16 min-h-screen bg-navbar ${
+                className={`text-colorMenu transition-all duration-500  z-[70] fixed left-0 top-0 w-64 px-6 lg:w-96 lg:px-10 2xl:px-16 min-h-screen bg-navbar ${
                     isShowMenu ? "opacity-100" : "-translate-x-full opacity-0"
                 }`}
             >
@@ -111,8 +111,7 @@ export const NavBar = () => {
                 <div className='flex  flex-col gap-5 font-normal text-lg lg:text-2xl lg:gap-8 mb-3'>
                     <div>
                         <a
-                            className={`hover:text-white hover:opacity-100 transition-colors duration-300`}
-                            to='/'
+                            className={`cursor-pointer hover:text-white hover:opacity-100 transition-colors duration-300`}
                             onClick={() => {
                                 handleSearchTypeChange("tv");
                                 viewNavigate("/", navigate);
@@ -123,8 +122,7 @@ export const NavBar = () => {
                     </div>
                     <div>
                         <a
-                            className={`hover:text-white hover:opacity-100 transition-colors duration-300`}
-                            to='/search'
+                            className={`cursor-pointer hover:text-white hover:opacity-100 transition-colors duration-300`}
                             onClick={() => {
                                 handleSearchTypeChange("tv");
                                 viewNavigate("/search", navigate);
@@ -135,8 +133,7 @@ export const NavBar = () => {
                     </div>
                     <div>
                         <a
-                            className='hover:text-white hover:opacity-100 transition-colors duration-300'
-                            to='/search'
+                            className='cursor-pointer hover:text-white hover:opacity-100 transition-colors duration-300'
                             onClick={() => {
                                 handleSearchTypeChange("movie");
                                 viewNavigate("/search", navigate);
@@ -147,8 +144,7 @@ export const NavBar = () => {
                     </div>
                     <div>
                         <a
-                            className='hover:text-white hover:opacity-100 transition-colors duration-300'
-                            to='/search'
+                            className='cursor-pointer hover:text-white hover:opacity-100 transition-colors duration-300'
                             onClick={() => {
                                 handleSearchTypeChange("movie");
                                 viewNavigate("/search", navigate);
@@ -159,8 +155,7 @@ export const NavBar = () => {
                     </div>
                     <div>
                         <a
-                            className='hover:text-white hover:opacity-100 transition-colors duration-300'
-                            to='/search'
+                            className='cursor-pointer hover:text-white hover:opacity-100 transition-colors duration-300'
                             onClick={() => {
                                 handleSearchTypeChange("movie");
                                 viewNavigate("/search", navigate);
@@ -171,8 +166,7 @@ export const NavBar = () => {
                     </div>
                     <div>
                         <a
-                            className='hover:text-white hover:opacity-100 transition-colors duration-300'
-                            to='/search'
+                            className='cursor-pointer hover:text-white hover:opacity-100 transition-colors duration-300'
                             onClick={() => {
                                 handleSearchTypeChange("movie");
                                 viewNavigate("/search", navigate);

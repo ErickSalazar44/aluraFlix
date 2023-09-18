@@ -16,7 +16,7 @@ function App() {
 
 
     return (
-        <div className='min-h-screen w-full select-none' style={fondo}>
+        <div className='min-h-screen w-full select-none flex flex-col' style={fondo}>
             <NavBar />
             <Routes>
                 {/* Home page */}

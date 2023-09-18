@@ -1,6 +1,6 @@
 import React from "react";
 
-const BodyMovieForId = ({ movie, path }) => {
+const BodyMovieForId = ({ movie, path, desplegarInfo }) => {
     
     // HORAS Y MINUTOS DE PELICULA
     const handleTimeMovie = (tiempo) => {
@@ -13,7 +13,7 @@ const BodyMovieForId = ({ movie, path }) => {
         <div className='px-6 md:px-10 lg:px-12 2xl:px-16 mb-8 relative z-30 max-w-[1400px] mx-auto'>
             <div className='w-full py-5'>
                 <h2 className='font-semibold text-titulo md:text-5xl md:mb-6 full-title'>
-                    {path === "/movie" ? movie?.title : movie?.original_name}
+                    {path === "/movie" ? movie?.title : desplegarInfo()?.original_name}
                 </h2>
                 <div className=' mt-2 text-xs opacity-100 font-light flex gap-4 md:text-sm'>
                     {movie?.runtime ? (
@@ -48,7 +48,7 @@ const BodyMovieForId = ({ movie, path }) => {
                     {movie?.tagline ? movie?.tagline : "Synopsis"}
                 </h3>
                 <p className='text-xs sm:text-sm md:text-base lg:max-w-7xl'>
-                    {movie?.overview}
+                    {desplegarInfo()?.overview}
                 </p>
             </div>
         </div>

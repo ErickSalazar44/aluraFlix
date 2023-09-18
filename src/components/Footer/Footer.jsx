@@ -1,4 +1,4 @@
-import { BsLinkedin, BsGithub } from "react-icons/bs";
+import { BsLinkedin, BsGithub, BsFillBriefcaseFill } from "react-icons/bs";
 
 const Footer = () => {
     return (
@@ -13,6 +13,11 @@ const Footer = () => {
                     <li>
                         <a href="https://github.com/ErickSalazar44/aluraFlix" target="_blank">
                             <BsGithub size={16} />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://portafolio-ericksalazar.netlify.app/" target="_blank">
+                            <BsFillBriefcaseFill size={16}/>
                         </a>
                     </li>
                 </ul>

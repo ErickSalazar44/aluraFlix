@@ -8,6 +8,7 @@ import SliderGenre from "../components/Search/SliderGenre";
 import { Input } from "../components/Search/Input";
 import GridMovie from "../components/Search/GridMovie";
 import LoadingSearch from "../components/Loading/SearchMovie/LoadingSearch";
+import MovieNoEncontrado from "../components/Search/MovieNoEncontrado";
 
 const SearchMovie = () => {
     // Traemos los generos y type serie (movie o tv)
@@ -53,8 +54,10 @@ const SearchMovie = () => {
         return <LoadingSearch />;
     }
 
+    console.log(datos)
+
     return (
-        <div className='px-8 md:px-10 lg:px-12 2xl:px-16 pt-[80px]'>
+        <div className='px-8 md:px-10 lg:px-12 2xl:px-16 pt-[80px] flex-grow'>
             {isError && <p>Hubo un error al cargar las peliculas</p>}
             {!loading && !isError && (
                 <>
@@ -72,15 +75,21 @@ const SearchMovie = () => {
                         />
                     </div>
                     {/* MOSTRAR PELICULAS POPULARES */}
-                    <div className='mt-10'>
-                        <h2 className='text-white font-semibold text-lg mb-6'>
-                            Búsquedas populares
-                        </h2>
-                        <GridMovie
-                            moviesToUse={datos ? datos : seriesOrMovies}
-                            handleNavigate={handleNavigate}
-                        />
-                    </div>
+                    {
+                        datos?.results.length === 0 
+                        ? <MovieNoEncontrado/>
+                        : 
+                        <div className='mt-10'>
+                            <h2 className='text-white font-semibold text-lg mb-6'>
+                                Búsquedas populares
+                            </h2>
+                            <GridMovie
+                                moviesToUse={datos ? datos : seriesOrMovies}
+                                handleNavigate={handleNavigate}
+                            />
+                        </div>
+                    }
+
                 </>
             )}
         </div>

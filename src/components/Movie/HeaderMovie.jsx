@@ -4,9 +4,10 @@ import Ligth from "./Ligth";
 import { useEffect, useState } from "react";
 import "../style/transition.css";
 
-const HeaderMovie = ({ movie, setPlaying }) => {
+const HeaderMovie = ({ movie, setPlaying, desplegarInfo }) => {
+
     const [backgroundImage, setBackgroundImage] = useState(
-        `https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`
+        `https://image.tmdb.org/t/p/original/${desplegarInfo()?.backdrop_path}`
     );
 
     useEffect(() => {
@@ -14,11 +15,11 @@ const HeaderMovie = ({ movie, setPlaying }) => {
             const handleResize = () => {
                 if (window.innerWidth >= 1024) {
                     setBackgroundImage(
-                        `https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`
+                        `https://image.tmdb.org/t/p/original/${desplegarInfo()?.backdrop_path}`
                     );
                 } else {
                     setBackgroundImage(
-                        `https://image.tmdb.org/t/p/w780/${movie?.backdrop_path}`
+                        `https://image.tmdb.org/t/p/w780/${desplegarInfo()?.backdrop_path}`
                     );
                 }
             };
@@ -36,8 +37,8 @@ const HeaderMovie = ({ movie, setPlaying }) => {
         backgroundImage: `url(${backgroundImage})`,
     };
 
-    const url = movie?.poster_path
-        ? `https://image.tmdb.org/t/p/original${movie?.poster_path}`
+    const url = desplegarInfo()?.poster_path
+        ? `https://image.tmdb.org/t/p/original${desplegarInfo()?.poster_path}`
         : "";
 
     // desplegar trailer
@@ -47,7 +48,7 @@ const HeaderMovie = ({ movie, setPlaying }) => {
 
     return (
         <header
-            style={movie?.backdrop_path ? bgImg : {}}
+            style={desplegarInfo()?.backdrop_path ? bgImg : {}}
             className='h-[46vh] sm:h-[50vh] md:h-[55vh] w-full min-w-full relative bg-cover bg-no-repeat   bg-left'
         >
             <div className='bg-gradiant absolute top-0 left-0 w-full h-[101%] '></div>
@@ -55,8 +56,8 @@ const HeaderMovie = ({ movie, setPlaying }) => {
             <div className=': w-full relative h-[46vh] sm:h-[50vh] md:h-[55vh] max-w-[1400px] mx-auto'>
                 <img
                     className={`full-embed absolute z-10 rounded bottom-4 left-6 w-[130px] movieId:w-[170px]  sm:w-[200px] sm:bottom-4 sm:left-8 md:left-10 lg:w-[220px] xl:left-12 xl:w-[240px] object-contain 2xl:left-16`}
-                    src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
-                    alt={movie?.title}
+                    src={`https://image.tmdb.org/t/p/w500/${desplegarInfo()?.poster_path}`}
+                    alt={desplegarInfo()?.title}
                 />
                 <div className='w-[50%] h-full ml-auto relative bottom-0'>
                     <div
@@ -71,7 +72,7 @@ const HeaderMovie = ({ movie, setPlaying }) => {
                     </div>
                 </div>
                 <div className='absolute right-6 -bottom-6 md:right-10 md:-bottom-10 lg:right-12 xl:right-14 2xl:right-16 bg-gray-950 rounded-full'>
-                    <Porcentaje movie={movie} />
+                    <Porcentaje movie={desplegarInfo()} />
                 </div>
             </div>
         </header>

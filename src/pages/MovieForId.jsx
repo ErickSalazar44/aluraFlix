@@ -13,6 +13,7 @@ import Recomendaciones from "../components/Movie/Recomendaciones";
 import BodyMovieForId from "../components/Movie/BodyMovieForId";
 import Categorias from "../components/Movie/Categorias";
 import LoadingMovie from "../components/Loading/MovieForId/LoadingMovie";
+import { useSelector } from "react-redux";
 
 const MovieForId = ({ path }) => {
     const { id } = useParams();
@@ -29,6 +30,9 @@ const MovieForId = ({ path }) => {
 
     const [similares, getSimilares, , loadingSimilarMovie] = useSimilar(path);
 
+
+    const movieGlobal = useSelector((state) => state.homeMovieSlice)
+
     useEffect(() => {
         getMovie(`${path}/${id}`, query);
     }, [path, id]);
@@ -39,21 +43,38 @@ const MovieForId = ({ path }) => {
         getSimilares(id);
     }, [path, id]);
 
+    // Si la pagina ya fue cargada mostrar los datos que tenemos en el estado global
+    const desplegarInfo = () => {
+        if (movieGlobal.length === 0) {
+            return movie
+        }
+
+        const selectMovie =  movieGlobal.results.find(movie => movie.id == id)
+        return selectMovie ? selectMovie : movie
+    }
+    
+    const idGlobal = () => {
+        if (movieGlobal.length === 0) {
+            return false
+        }
+        const selectMovie =  movieGlobal.results.find(movie => movie.id == id)
+        return selectMovie ? true : false
+    }
+
     // Desplegar trailer
     const [playing, setPlaying] = useState(false);
 
-    // if (!movie || loading || loadingProviders || loadingCredits || loadingSimilarMovie) {
-    //     return <LoadingMovie />;
-    // }
-
+    if (!idGlobal() && (!movie || loading || loadingProviders || loadingCredits || loadingSimilarMovie ) ) {
+        return <LoadingMovie />;
+    }
 
     return (
         <article className='text-white'>
             {/* header */}
-            <HeaderMovie movie={movie} setPlaying={setPlaying} />
+            <HeaderMovie movie={movie} setPlaying={setPlaying} desplegarInfo={desplegarInfo}/>
 
             {/* BODY */}
-            <BodyMovieForId movie={movie} path={path} />
+            <BodyMovieForId movie={movie} path={path} desplegarInfo={desplegarInfo}/>
 
             {/* Categorias */}
             <Categorias movie={movie} />
