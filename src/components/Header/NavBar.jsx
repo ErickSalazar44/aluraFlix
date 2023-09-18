@@ -56,7 +56,7 @@ export const NavBar = () => {
                             className='w-[24px] h-[24px] cursor-pointer text-neutral-400 '
                         />
                         <div className='hidden lg:flex lg:gap-7 lg:font-bold lg:absolute lg:left-14 lg:text-neutral-400 '>
-                            <a
+                            <span
                                 className={`hover:text-white hover:opacity-100 transition-colors duration-300 cursor-pointer ${
                                     searchType === "movie" &&
                                     "text-white opacity-100"
@@ -67,8 +67,8 @@ export const NavBar = () => {
                                 }}
                             >
                                 Películas
-                            </a>
-                            <a
+                            </span>
+                            <span
                                 className={`hover:text-white hover:opacity-100 transition-colors duration-300 cursor-pointer ${
                                     searchType === "tv" &&
                                     "text-white opacity-100"
@@ -79,7 +79,7 @@ export const NavBar = () => {
                                 }}
                             >
                                 Series
-                            </a>
+                            </span>
                         </div>
                     </div>
                     <div className='w-28 lg:w-36'>
@@ -91,9 +91,9 @@ export const NavBar = () => {
                         />
                     </div>
                     <div className='cursor-pointer'>
-                        <a onClick={() => viewNavigate("/search", navigate)}>
+                        <span onClick={() => viewNavigate("/search", navigate)}>
                             <GoSearch className='w-[24px] h-[24px] cursor-pointer text-neutral-100 ' />
-                        </a>
+                        </span>
                     </div>
                 </nav>
             </header>
@@ -110,7 +110,7 @@ export const NavBar = () => {
                 </div>
                 <div className='flex  flex-col gap-5 font-normal text-lg lg:text-2xl lg:gap-8 mb-3'>
                     <div>
-                        <a
+                        <span
                             className={`cursor-pointer hover:text-white hover:opacity-100 transition-colors duration-300`}
                             onClick={() => {
                                 handleSearchTypeChange("tv");
@@ -118,10 +118,10 @@ export const NavBar = () => {
                             }}
                         >
                             Inicio
-                        </a>
+                        </span>
                     </div>
                     <div>
-                        <a
+                        <span
                             className={`cursor-pointer hover:text-white hover:opacity-100 transition-colors duration-300`}
                             onClick={() => {
                                 handleSearchTypeChange("tv");
@@ -129,10 +129,10 @@ export const NavBar = () => {
                             }}
                         >
                             Series
-                        </a>
+                        </span>
                     </div>
                     <div>
-                        <a
+                        <span
                             className='cursor-pointer hover:text-white hover:opacity-100 transition-colors duration-300'
                             onClick={() => {
                                 handleSearchTypeChange("movie");
@@ -140,10 +140,10 @@ export const NavBar = () => {
                             }}
                         >
                             Películas
-                        </a>
+                        </span>
                     </div>
                     <div>
-                        <a
+                        <span
                             className='cursor-pointer hover:text-white hover:opacity-100 transition-colors duration-300'
                             onClick={() => {
                                 handleSearchTypeChange("movie");
@@ -151,10 +151,10 @@ export const NavBar = () => {
                             }}
                         >
                             Originales
-                        </a>
+                        </span>
                     </div>
                     <div>
-                        <a
+                        <span
                             className='cursor-pointer hover:text-white hover:opacity-100 transition-colors duration-300'
                             onClick={() => {
                                 handleSearchTypeChange("movie");
@@ -162,10 +162,10 @@ export const NavBar = () => {
                             }}
                         >
                             Tendencias
-                        </a>
+                        </span>
                     </div>
                     <div>
-                        <a
+                        <span
                             className='cursor-pointer hover:text-white hover:opacity-100 transition-colors duration-300'
                             onClick={() => {
                                 handleSearchTypeChange("movie");
@@ -173,13 +173,13 @@ export const NavBar = () => {
                             }}
                         >
                             Ver mas
-                        </a>
+                        </span>
                     </div>
                 </div>
                 <div className='flex flex-col gap-4 mt-8'>
                     <span className='w-full h-[1px] bg-colorMenu opacity-30'></span>
                     <div className='flex justify-between lg:text-2xl lg:gap-8 items-center'>
-                        <a
+                        <span
                             className='hover:text-white hover:opacity-100 transition-colors duration-300'
                             onClick={() => {
                                 handleSearchTypeChange("movie");
@@ -187,7 +187,7 @@ export const NavBar = () => {
                             }}
                         >
                             Géneros
-                        </a>
+                        </span>
                         <MdKeyboardArrowRight size={24} />
                     </div>
                     <span className='w-full h-[1px] bg-colorMenu opacity-30'></span>

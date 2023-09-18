@@ -17,8 +17,6 @@ import {
     MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { viewNavigate } from "../../utils/animationNavigate";
-import { flushSync } from "react-dom";
 import { viewTransition } from "../../utils/viewTransition";
 
 const MovieSlider = ({ movies, genres }) => {
@@ -90,6 +88,15 @@ const MovieSlider = ({ movies, genres }) => {
         },
     };
 
+    const getPosterUrl = (movie, windowWidth) => {
+        const baseUrl = "https://image.tmdb.org/t/p/";
+        const size = windowWidth < 700 ? "w185" : "w500";
+        return movie?.poster_path
+            ? `${baseUrl}${size}/${movie?.poster_path}`
+            : "/noImage.avif";
+    };
+    const windowWidth = window.innerWidth;
+
     return (
         <>
             <MovieBackground
@@ -128,15 +135,15 @@ const MovieSlider = ({ movies, genres }) => {
                             <SwiperSlide key={movie.id} className='w-full'>
                                 <div
                                     onClick={(e) => {
-                                        viewTransition(`/tv/${movie.id}`, navigate, e)
+                                        viewTransition(
+                                            `/tv/${movie.id}`,
+                                            navigate,
+                                            e
+                                        );
                                     }}
                                 >
                                     <img
-                                        src={
-                                            movie?.poster_path
-                                                ? `https://image.tmdb.org/t/p/w500/${movie?.poster_path}`
-                                                : "/noImage.avif"
-                                        }
+                                        src={getPosterUrl(movie, windowWidth)}
                                         alt={`poster_path${id}`}
                                         className={`mix-blend-normal h-auto w-[250px] sm:h-[270px] md:h-[280px] lg:w-[360px] object-contain rounded`}
                                     />

@@ -49,7 +49,7 @@ const MovieBackground = ({
                                 : "/noImage.avif"
                         }
                         alt={movies?.[currentIndex].original_name}
-                        className='absolute z-[1] top-0 w-[100vw] right-0 h-[85vh] min-w-full object-cover saturate-[1.2]'
+                        className='absolute z-[1] top-0 w-[100vw] right-0 h-[85vh] object-cover saturate-[1.2]'
                         onLoad={(e) => {
                             e.target.style.opacity = 1;
                         }}
