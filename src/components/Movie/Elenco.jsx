@@ -57,7 +57,9 @@ const Elenco = ({ elenco }) => {
                     return (
                         <SwiperSlide key={actor.id}>
                             <div
-                                onClick={() => openModal(i)}
+                                onClick={() => {
+                                    openModal(i)
+                                }}
                                 className='relative max-w-[170px] overflow-hidden  rounded-xl'
                             >
                                 <div className='absolute w-full h-full bg-yGradiant opacity-80'></div>

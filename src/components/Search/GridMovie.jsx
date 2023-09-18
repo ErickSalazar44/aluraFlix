@@ -15,7 +15,12 @@ const GridMovie = ({moviesToUse, handleNavigate}) => {
                             e.target.src = '/noImage.avif'
                             e.target.style.pointerEvents = "none";
                         }}
-                        onClick={() => handleNavigate(movie.id)}
+                        onClick={(e) => {
+                            if (e.target.src.endsWith('/noImage.avif')) {
+                                return;
+                            }
+                            handleNavigate(movie.id);
+                        }}
                     />
                 </article>
             ))}
