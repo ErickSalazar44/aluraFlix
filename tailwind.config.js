@@ -7,7 +7,7 @@ export default {
                 gradient:
                     "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4990371148459384) 35%, rgba(0,0,0,0) 70%)",
                 gradiant:
-                    "linear-gradient(to right, rgb(0 0 0) 0%, rgb(0 0 0 / 0%) 100%)",
+                    "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);",
                 yGradiant:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 70%, rgb(10, 10, 10, 40) 100.09%)",
                 yGradiantModal:

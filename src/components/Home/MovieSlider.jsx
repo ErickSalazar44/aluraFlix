@@ -7,6 +7,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+import "../style/transition.css";
+
 import { useEffect, useState } from "react";
 import MovieBackground from "./MovieBackground";
 
@@ -16,6 +18,8 @@ import {
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { viewNavigate } from "../../utils/animationNavigate";
+import { flushSync } from "react-dom";
+import { viewTransition } from "../../utils/viewTransition";
 
 const MovieSlider = ({ movies, genres }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -94,7 +98,7 @@ const MovieSlider = ({ movies, genres }) => {
                 genreNamesByIds={genreNamesByIds}
                 navigate={navigate}
             />
-            <div className='px-8 md:px-10 lg:px-12 2xl:px-16 overflow-hidden'>
+            <div className='px-8 md:px-10 lg:px-12 2xl:px-16'>
                 <h2 className='text-white text-[1.2rem] z-20 relative font-semibold mb-3'>
                     Últimas series
                 </h2>
@@ -117,18 +121,24 @@ const MovieSlider = ({ movies, genres }) => {
                             prevEl: ".swiper-button-prev",
                         }}
                         modules={[Pagination, Navigation, Autoplay]}
-                        className='mySwiper overflow-hidden'
+                        className='mySwiper '
                         autoplay={{ delay: 4500 }}
                     >
                         {movies?.slice(0, showMovies).map((movie) => (
                             <SwiperSlide key={movie.id} className='w-full'>
-                                <div className='w-full cursor-pointer'>
+                                <div
+                                    onClick={(e) => {
+                                        viewTransition(`/tv/${movie.id}`, navigate, e)
+                                    }}
+                                >
                                     <img
-                                        src={movie?.poster_path ? `https://image.tmdb.org/t/p/w500/${movie?.poster_path}` : '/noImage.avif'}
+                                        src={
+                                            movie?.poster_path
+                                                ? `https://image.tmdb.org/t/p/w500/${movie?.poster_path}`
+                                                : "/noImage.avif"
+                                        }
                                         alt={movie.title}
-                                        className='h-auto w-[250px] sm:h-[270px] md:h-[280px] lg:w-[360px] object-contain rounded'
-                                        onClick={() => viewNavigate(`/tv/${movie.id}`, navigate)}
-                                        style={{viewTransitionName: `imagen${movie.id}`}}
+                                        className={`mix-blend-normal h-auto w-[250px] sm:h-[270px] md:h-[280px] lg:w-[360px] object-contain rounded`}
                                     />
                                 </div>
                             </SwiperSlide>

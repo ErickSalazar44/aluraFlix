@@ -42,11 +42,10 @@ const MovieForId = ({ path }) => {
     // Desplegar trailer
     const [playing, setPlaying] = useState(false);
 
-    if (loading || loadingProviders || loadingCredits || loadingSimilarMovie) {
-        return (
-            <LoadingMovie/>
-        )
-    }
+    // if (!movie || loading || loadingProviders || loadingCredits || loadingSimilarMovie) {
+    //     return <LoadingMovie />;
+    // }
+
 
     return (
         <article className='text-white'>
@@ -54,16 +53,16 @@ const MovieForId = ({ path }) => {
             <HeaderMovie movie={movie} setPlaying={setPlaying} />
 
             {/* BODY */}
-            <BodyMovieForId movie={movie} path={path}/>
+            <BodyMovieForId movie={movie} path={path} />
 
             {/* Categorias */}
-            <Categorias movie={movie}/>
+            <Categorias movie={movie} />
 
             {/* Homepage */}
             {movie?.homepage.length > 0 && (
                 <div className='px-6 md:px-10 lg:px-12 2xl:px-16 mt-8 flex items-center gap-16 max-w-[1400px] mx-auto'>
                     <a href={movie?.homepage} className='block w-[180px]'>
-                        <Button text='Home Page' noNavigate={true}/>
+                        <Button text='Home Page' noNavigate={true} />
                     </a>
                 </div>
             )}

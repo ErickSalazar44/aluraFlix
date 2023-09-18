@@ -16,21 +16,14 @@ const Porcentaje = ({ movie }) => {
     const longitudDeRelleno = (`${percent}` / 100) * circunferencia;
 
     return (
-        <div className='cursor-context-menu relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 before:hover:opacity-100 before:transition-opacity before:opacity-0 before:text-xs before:rounded-sm before:py-1 before:px-2 before:bg-[#111] before:right-1/2 before:translate-x-1/2 before:-top-14 before:absolute before:content-["Puntuación_de_usuario"]'>
+        <div className='relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 before:hover:opacity-100 before:transition-opacity before:opacity-0 before:text-xs before:rounded-sm before:py-1 before:px-2 before:bg-[#111] before:right-1/2 before:translate-x-1/2 before:-top-14 before:absolute before:content-["Puntuación_de_usuario"]'>
             <svg
                 width='100%'
                 height='100%'
                 viewBox={`0 0 ${2 * radio} ${2 * radio}`}
                 xmlns='http://www.w3.org/2000/svg'
-                className="stroke-[5] lg:stroke-[6]"
+                className="stroke-[5] lg:stroke-[6] "
             >
-                <circle
-                    cx={radio}
-                    cy={radio}
-                    r={radio - 2}
-                    fill='transparent'
-                    stroke='#050b1b'
-                />
                 <circle
                     cx={radio}
                     cy={radio}

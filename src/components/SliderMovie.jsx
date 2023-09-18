@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import { useNavigate } from "react-router-dom";
 import { Navigation } from "swiper/modules";
 import { viewNavigate } from "../utils/animationNavigate";
+import { viewTransition } from "../utils/viewTransition";
 
 const SliderMovie = ({ movies, isMovie, nextEl, prevEl, pageId }) => {
     const navigate = useNavigate();
@@ -58,8 +59,7 @@ const SliderMovie = ({ movies, isMovie, nextEl, prevEl, pageId }) => {
                                 e.target.src = "/noImage.avif";
                                 e.target.style.pointerEvents = "none";
                             }}
-                            onClick={() => viewNavigate(`${isMovie}/${movie.id}`, navigate)}
-                            style={{viewTransitionName:`image${movie.id}`}}
+                            onClick={(e) => viewNavigate(`${isMovie}/${movie.id}`, navigate)}
                         />
                     </div>
                 </SwiperSlide>

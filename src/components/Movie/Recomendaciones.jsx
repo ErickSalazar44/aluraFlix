@@ -20,14 +20,14 @@ const Recomendaciones = ({ similares, isMovie }) => {
             <div className='relative'>
                 {/* Botón Controller */}
                 <SliderMovie movies={similares} isMovie={isMovie} nextEl={nextEl} prevEl={prevEl} pageId={true}/>
-                <div ref={nextEl} className={` swiper-button-next absolute top-[60%] -right-8 transform -translate-y-1/2 w-8  text-white opacity-80 after:content-none`}>
+                <span ref={nextEl} className={` swiper-button-next absolute top-[60%] -right-8 transform -translate-y-1/2 w-8  text-white opacity-80 after:content-none`}>
                     <MdOutlineKeyboardArrowRight
                         size={40}
                     />
-                </div>
-                <div ref={prevEl} className={`swiper-button-prev absolute top-[60%] -left-8 transform -translate-y-1/2 w-8 text-white opacity-80 after:content-none`}>
+                </span>
+                <span ref={prevEl} className={`swiper-button-prev absolute top-[60%] -left-8 transform -translate-y-1/2 w-8 text-white opacity-80 after:content-none`}>
                     <MdKeyboardArrowLeft size={40} />
-                </div>
+                </span>
             </div>
         </div>
     );

@@ -2,8 +2,7 @@
 
 import { flushSync } from "react-dom";
 
-export const viewNavigate = (nuevaRuta, navigate, isLoading) => {
-    if (isLoading) return;
+export const viewNavigate = (nuevaRuta, navigate) => {
     window.scroll(0, 0);
     if (!document.startViewTransition) {
         return navigate(nuevaRuta);

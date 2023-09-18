@@ -12,7 +12,7 @@ const BodyMovieForId = ({ movie, path }) => {
     return (
         <div className='px-6 md:px-10 lg:px-12 2xl:px-16 mb-8 relative z-30 max-w-[1400px] mx-auto'>
             <div className='w-full py-5'>
-                <h2 className='font-semibold text-titulo md:text-5xl md:mb-6'>
+                <h2 className='font-semibold text-titulo md:text-5xl md:mb-6 full-title'>
                     {path === "/movie" ? movie?.title : movie?.original_name}
                 </h2>
                 <div className=' mt-2 text-xs opacity-100 font-light flex gap-4 md:text-sm'>

@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CiPlay1 } from "react-icons/ci";
 import { viewNavigate } from "../../utils/animationNavigate";
+import { flushSync } from "react-dom";
 
 const MovieBackground = ({
     movies,
     genreNamesByIds,
     currentIndex,
-    navigate
+    navigate,
 }) => {
     const [backgroundImage, setBackgroundImage] = useState(
         `https://image.tmdb.org/t/p/w780${movies?.[currentIndex]?.poster_path}`
     );
-
+    const title = useRef(null);
     useEffect(() => {
         if (movies) {
             const handleResize = () => {
@@ -25,10 +26,10 @@ const MovieBackground = ({
                     );
                 }
             };
-    
+
             window.addEventListener("resize", handleResize);
             handleResize();
-    
+
             return () => {
                 window.removeEventListener("resize", handleResize);
             };
@@ -40,15 +41,19 @@ const MovieBackground = ({
             <section
                 className={`flex flex-col relative pt-[80px] after:content-[''] after:absolute after:inset-0 after:z-[1] after:bg-gradient after:h-[85vh]`}
             >
-                <div className="w-full top-0 right-0 h-[85vh] absolute z-[1]">
+                <div className='w-full top-0 right-0 h-[85vh] absolute z-[1]'>
                     <img
-                        src={movies?.[currentIndex].poster_path ? backgroundImage: '/noImage.avif'}
+                        src={
+                            movies?.[currentIndex].poster_path
+                                ? backgroundImage
+                                : "/noImage.avif"
+                        }
                         alt={movies?.[currentIndex]?.title}
                         className='absolute z-[1] top-0 w-[100vw] right-0 h-[85vh] min-w-full object-cover saturate-[1.2]'
                         onLoad={(e) => {
-                            e.target.style.opacity = 1; 
+                            e.target.style.opacity = 1;
                         }}
-                        style={{ opacity: 0, transition: 'opacity 0.5s' }}
+                        style={{ opacity: 0, transition: "opacity 0.5s" }}
                     />
                 </div>
 
@@ -56,7 +61,10 @@ const MovieBackground = ({
                     <div
                         className={`flex flex-col gap-3 justify-end min-h-homeSpaceFondo lg:min-h-homeSpaceFondoPC`}
                     >
-                        <h2 className='text-white text-[1.875rem] font-semibold lg:text-[40px]'>
+                        <h2
+                            ref={title}
+                            className='text-white text-[1.875rem] font-semibold lg:text-[40px]'
+                        >
                             {movies?.[currentIndex]?.original_name}
                         </h2>
                         <ul className='flex text-xs movieId:text-sm gap-4 text-white lg:text-lg lg:gap-6'>
@@ -66,9 +74,17 @@ const MovieBackground = ({
                         </ul>
                         <span
                             className='mt-6 w-[40px]'
-                            onClick={() =>
-                                viewNavigate(movies?.[currentIndex].id, navigate)
-                            }
+                            onClick={() => {
+                                title.current.classList.add("full-title");
+                                document.startViewTransition(async () => {
+                                    title.current.style.viewTransitionName = "";
+                                    flushSync(() =>
+                                        navigate(
+                                            `/tv/${movies?.[currentIndex].id}`
+                                        )
+                                    );
+                                });
+                            }}
                         >
                             <CiPlay1
                                 color='white'
