@@ -79,7 +79,7 @@ const SearchMovie = () => {
                         datos?.results.length === 0 
                         ? <MovieNoEncontrado/>
                         : 
-                        <div className='mt-10'>
+                        <main className='mt-10'>
                             <h2 className='text-white font-semibold text-lg mb-6'>
                                 Búsquedas populares
                             </h2>
@@ -87,7 +87,7 @@ const SearchMovie = () => {
                                 moviesToUse={datos ? datos : seriesOrMovies}
                                 handleNavigate={handleNavigate}
                             />
-                        </div>
+                        </main>
                     }
 
                 </>

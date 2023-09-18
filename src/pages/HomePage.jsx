@@ -43,7 +43,7 @@ const HomePage = () => {
         <div>
             {isError && <p>Hubo un error al cargar las peliculas</p>}
             {!loading && !isError && (
-                <>
+                <main>
                     {/* HOME HEADER  */}
                     <MovieSlider
                         movies={popularMovies?.results}
@@ -129,7 +129,7 @@ const HomePage = () => {
                             />
                         </div>
                     </section>
-                </>
+                </main>
             )}
         </div>
     );

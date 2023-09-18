@@ -1,8 +1,8 @@
 const GridMovie = ({moviesToUse, handleNavigate}) => {
     return (
-        <div className='grid gap-4 md:gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8'>
+        <section className='grid gap-4 md:gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8'>
             {moviesToUse?.results?.map((movie) => (
-                <div
+                <article
                     className="cursor-pointer  transition duration-300 filter saturate-[0.9] hover:saturate-[1.1] border-transparent border-4 hover:border-cyan-600"
                     key={movie.id}
                 >
@@ -17,9 +17,9 @@ const GridMovie = ({moviesToUse, handleNavigate}) => {
                         }}
                         onClick={() => handleNavigate(movie.id)}
                     />
-                </div>
+                </article>
             ))}
-        </div>
+        </section>
     );
 };
 

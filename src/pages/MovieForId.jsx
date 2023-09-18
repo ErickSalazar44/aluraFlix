@@ -69,7 +69,7 @@ const MovieForId = ({ path }) => {
     }
 
     return (
-        <article className='text-white'>
+        <main className='text-white'>
             {/* header */}
             <HeaderMovie movie={movie} setPlaying={setPlaying} desplegarInfo={desplegarInfo}/>
 
@@ -128,7 +128,7 @@ const MovieForId = ({ path }) => {
             <div className='px-6 md:px-10 lg:px-12 2xl:px-16 mt-8 overflow-hidden'>
                 <Recomendaciones similares={similares} isMovie={path} />
             </div>
-        </article>
+        </main>
     );
 };
 

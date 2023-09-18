@@ -10,8 +10,8 @@ const BodyMovieForId = ({ movie, path, desplegarInfo }) => {
     };
 
     return (
-        <div className='px-6 md:px-10 lg:px-12 2xl:px-16 mb-8 relative z-30 max-w-[1400px] mx-auto'>
-            <div className='w-full py-5'>
+        <article className='px-6 md:px-10 lg:px-12 2xl:px-16 mb-8 relative z-30 max-w-[1400px] mx-auto'>
+            <header className='w-full py-5'>
                 <h2 className='font-semibold text-titulo md:text-5xl md:mb-6 full-title'>
                     {path === "/movie" ? movie?.title : desplegarInfo()?.original_name}
                 </h2>
@@ -41,17 +41,17 @@ const BodyMovieForId = ({ movie, path, desplegarInfo }) => {
                     </span>
                     <span>HD</span>
                 </div>
-            </div>
+            </header>
 
-            <div className='opacity-80 '>
+            <footer className='opacity-80 '>
                 <h3 className='text-sm sm:text-base font-semibold mb-2'>
                     {movie?.tagline ? movie?.tagline : "Synopsis"}
                 </h3>
                 <p className='text-xs sm:text-sm md:text-base lg:max-w-7xl'>
                     {desplegarInfo()?.overview}
                 </p>
-            </div>
-        </div>
+            </footer>
+        </article>
     );
 };
 
