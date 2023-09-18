@@ -18,6 +18,7 @@ import {
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { viewTransition } from "../../utils/viewTransition";
+import { getPosterUrl } from "../../utils/getPosterUrl";
 
 const MovieSlider = ({ movies, genres }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -88,13 +89,7 @@ const MovieSlider = ({ movies, genres }) => {
         },
     };
 
-    const getPosterUrl = (movie, windowWidth) => {
-        const baseUrl = "https://image.tmdb.org/t/p/";
-        const size = windowWidth < 700 ? "w185" : "w500";
-        return movie?.poster_path
-            ? `${baseUrl}${size}/${movie?.poster_path}`
-            : "/noImage.avif";
-    };
+
     const windowWidth = window.innerWidth;
 
     return (
