@@ -61,7 +61,7 @@ const HomePage = () => {
                                 películas y series icónicas!
                             </p>
                             <div className='hidden md:block'>
-                                <Button text='VER AHORA' noNavigate={true} />
+                                <Button text='VER AHORA' noNavigate={false} />
                             </div>
                         </div>
                         <PublicityPage url='/anuncio.avif' />

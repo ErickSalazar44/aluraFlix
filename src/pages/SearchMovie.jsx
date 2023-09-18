@@ -54,8 +54,6 @@ const SearchMovie = () => {
         return <LoadingSearch />;
     }
 
-    console.log(datos)
-
     return (
         <div className='px-8 md:px-10 lg:px-12 2xl:px-16 pt-[80px] flex-grow'>
             {isError && <p>Hubo un error al cargar las peliculas</p>}
