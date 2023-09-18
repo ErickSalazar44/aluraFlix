@@ -124,7 +124,7 @@ const MovieSlider = ({ movies, genres }) => {
                         className='mySwiper '
                         autoplay={{ delay: 4500 }}
                     >
-                        {movies?.slice(0, showMovies).map((movie) => (
+                        {movies?.slice(0, showMovies).map((movie, id) => (
                             <SwiperSlide key={movie.id} className='w-full'>
                                 <div
                                     onClick={(e) => {
@@ -137,7 +137,7 @@ const MovieSlider = ({ movies, genres }) => {
                                                 ? `https://image.tmdb.org/t/p/w500/${movie?.poster_path}`
                                                 : "/noImage.avif"
                                         }
-                                        alt={movie?.title}
+                                        alt={`poster_path${id}`}
                                         className={`mix-blend-normal h-auto w-[250px] sm:h-[270px] md:h-[280px] lg:w-[360px] object-contain rounded`}
                                     />
                                 </div>
