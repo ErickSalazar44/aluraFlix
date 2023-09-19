@@ -5,11 +5,13 @@ import axios from "axios";
 export const fetchGenres = createAsyncThunk(
     "genres/fetchGenres",
     async (ismovie) => {
-        const apiKey = "617b8b681bdb0227b53464f2d357d8e1";
+        const headers = {
+            Accept: "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_API_URL}`,
+        };
 
-        const response = await axios.get(
-            `https://api.themoviedb.org/3/genre/${ismovie}/list?language=es-ES&api_key=${apiKey}`
-        );
+        const url = `https://api.themoviedb.org/3/genre/${ismovie}/list?language=es-ES&locale=US`;
+        const response = await axios.get(url, { headers });
         return response.data.genres;
     }
 );
